@@ -505,3 +505,39 @@ Found multiple occurrences of org.json.JSONObject on the class path:
 
 You may wish to exclude one of them to ensure predictable runtime behavior
 
+[17 Aug 2025 19:47:45,763 INFO  TomcatWebServer -TomcatWebServer.java]- Tomcat initialized with port 8080 (http)
+[17 Aug 2025 19:47:45,793 INFO  StandardService -DirectJDKLog.java]- Starting service [Tomcat]
+[17 Aug 2025 19:47:45,793 INFO  StandardEngine -DirectJDKLog.java]- Starting Servlet engine: [Apache Tomcat/10.1.43]
+[17 Aug 2025 19:47:45,871 INFO  [/] -DirectJDKLog.java]- Initializing Spring embedded WebApplicationContext
+[17 Aug 2025 19:47:45,881 INFO  ServletWebServerApplicationContext -ServletWebServerApplicationContext.java]- Root WebApplicationContext: initialization completed in 2528 ms
+[17 Aug 2025 19:47:47,471 INFO  TomcatWebServer -TomcatWebServer.java]- Tomcat started on port 8080 (http) with context path '/'
+[17 Aug 2025 19:51:32,141 INFO  TomcatWebServer -TomcatWebServer.java]- Tomcat initialized with port 8080 (http)
+[17 Aug 2025 19:51:32,171 INFO  StandardService -DirectJDKLog.java]- Starting service [Tomcat]
+[17 Aug 2025 19:51:32,171 INFO  StandardEngine -DirectJDKLog.java]- Starting Servlet engine: [Apache Tomcat/10.1.43]
+[17 Aug 2025 19:51:32,264 INFO  [/] -DirectJDKLog.java]- Initializing Spring embedded WebApplicationContext
+[17 Aug 2025 19:51:32,265 INFO  ServletWebServerApplicationContext -ServletWebServerApplicationContext.java]- Root WebApplicationContext: initialization completed in 2185 ms
+[17 Aug 2025 19:51:33,595 INFO  TomcatWebServer -TomcatWebServer.java]- Tomcat started on port 8080 (http) with context path '/'
+[17 Aug 2025 20:17:51,324 INFO  TomcatWebServer -TomcatWebServer.java]- Tomcat initialized with port 8080 (http)
+[17 Aug 2025 20:17:51,378 INFO  StandardService -DirectJDKLog.java]- Starting service [Tomcat]
+[17 Aug 2025 20:17:51,378 INFO  StandardEngine -DirectJDKLog.java]- Starting Servlet engine: [Apache Tomcat/10.1.43]
+[17 Aug 2025 20:17:51,482 INFO  [/] -DirectJDKLog.java]- Initializing Spring embedded WebApplicationContext
+[17 Aug 2025 20:17:51,483 INFO  ServletWebServerApplicationContext -ServletWebServerApplicationContext.java]- Root WebApplicationContext: initialization completed in 2350 ms
+[17 Aug 2025 20:17:53,152 INFO  TomcatWebServer -TomcatWebServer.java]- Tomcat started on port 8080 (http) with context path '/'
+[17 Aug 2025 20:20:58,204 INFO  TomcatWebServer -TomcatWebServer.java]- Tomcat initialized with port 8080 (http)
+[17 Aug 2025 20:20:58,261 INFO  StandardService -DirectJDKLog.java]- Starting service [Tomcat]
+[17 Aug 2025 20:20:58,262 INFO  StandardEngine -DirectJDKLog.java]- Starting Servlet engine: [Apache Tomcat/10.1.43]
+[17 Aug 2025 20:20:58,432 INFO  [/] -DirectJDKLog.java]- Initializing Spring embedded WebApplicationContext
+[17 Aug 2025 20:20:58,432 INFO  ServletWebServerApplicationContext -ServletWebServerApplicationContext.java]- Root WebApplicationContext: initialization completed in 2125 ms
+[17 Aug 2025 20:20:59,856 INFO  TomcatWebServer -TomcatWebServer.java]- Tomcat started on port 8080 (http) with context path '/'
+[17 Aug 2025 20:26:31,598 INFO  TomcatWebServer -TomcatWebServer.java]- Tomcat initialized with port 8080 (http)
+[17 Aug 2025 20:26:31,636 INFO  StandardService -DirectJDKLog.java]- Starting service [Tomcat]
+[17 Aug 2025 20:26:31,639 INFO  StandardEngine -DirectJDKLog.java]- Starting Servlet engine: [Apache Tomcat/10.1.43]
+[17 Aug 2025 20:26:31,718 INFO  [/] -DirectJDKLog.java]- Initializing Spring embedded WebApplicationContext
+[17 Aug 2025 20:26:31,732 INFO  ServletWebServerApplicationContext -ServletWebServerApplicationContext.java]- Root WebApplicationContext: initialization completed in 1886 ms
+[17 Aug 2025 20:26:32,951 INFO  TomcatWebServer -TomcatWebServer.java]- Tomcat started on port 8080 (http) with context path '/'
+[17 Aug 2025 20:28:09,400 INFO  TomcatWebServer -TomcatWebServer.java]- Tomcat initialized with port 8080 (http)
+[17 Aug 2025 20:28:09,431 INFO  StandardService -DirectJDKLog.java]- Starting service [Tomcat]
+[17 Aug 2025 20:28:09,431 INFO  StandardEngine -DirectJDKLog.java]- Starting Servlet engine: [Apache Tomcat/10.1.43]
+[17 Aug 2025 20:28:09,509 INFO  [/] -DirectJDKLog.java]- Initializing Spring embedded WebApplicationContext
+[17 Aug 2025 20:28:09,520 INFO  ServletWebServerApplicationContext -ServletWebServerApplicationContext.java]- Root WebApplicationContext: initialization completed in 2096 ms
+[17 Aug 2025 20:28:10,782 INFO  TomcatWebServer -TomcatWebServer.java]- Tomcat started on port 8080 (http) with context path '/'
