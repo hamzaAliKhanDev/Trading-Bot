@@ -12,8 +12,7 @@ import java.nio.charset.StandardCharsets;
 @Service
 public class DeltaSignatureUtil {
 	
-	private static final Logger consoleLogger = LogManager.getLogger("Console");
-	private static final Logger errorLogger = LogManager.getLogger("Error");
+    private static final Logger errorLogger = LogManager.getLogger("Error");
 	
     public String hmacSHA256(String data, String secret) {
         try {
@@ -30,8 +29,7 @@ public class DeltaSignatureUtil {
             return sb.toString();
 
         } catch (Exception e) {
-            System.out.println("Error generating HMAC: " + e.getMessage());
-            e.printStackTrace();
+            errorLogger.error("Error generating HMAC: ", e);
             return null;
         }
     }
