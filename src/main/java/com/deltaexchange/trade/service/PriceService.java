@@ -28,7 +28,7 @@ public class PriceService {
     consoleLogger.info("Calling Delta API with URL:::::{}", fullUrl);
 
     return webClientService
-            .buildClient(config.getBaseUrl(), config.getApiKey())
+            .buildClient(config.getBaseUrl())
             .get()
             .uri(url)
             .retrieve()

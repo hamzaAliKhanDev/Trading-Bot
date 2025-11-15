@@ -22,6 +22,7 @@ public class OrderService {
 	
     @Autowired private WebClientService webClientService;
     @Autowired private DeltaConfig config;
+    @Autowired private DeltaSignatureUtil signRequest;
 
     public void placeOrder(String side, double size, Double limitPrice, String orderType) {
         String path = "/v2/orders";
@@ -35,11 +36,11 @@ public class OrderService {
         params.put("order_type", orderType);
         if (limitPrice != null) params.put("limit_price", limitPrice);
 
-        String signature = DeltaSignatureUtil.signRequest(params, config.getApiSecret());
+        String signature = signRequest.hmacSHA256(params.toString(), config.getApiSecret());
         params.put("signature", signature);
 
         String response = webClientService
-                .buildClient(config.getBaseUrl(), config.getApiKey())
+                .buildClient(config.getBaseUrl())
                 .post()
                 .uri(path)
                 .bodyValue(params)

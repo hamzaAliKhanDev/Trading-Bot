@@ -13,8 +13,6 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 import java.time.Instant;
-import java.util.Map;
-import java.util.TreeMap;
 
 @Service
 @RequiredArgsConstructor
@@ -23,49 +21,50 @@ public class PositionService {
     private static final Logger consoleLogger = LogManager.getLogger("Console");
     private static final Logger errorLogger = LogManager.getLogger("Error");
 
-    @Autowired private WebClientService webClientService;
-    @Autowired private DeltaConfig config;
+    @Autowired
+    private WebClientService webClientService;
+    @Autowired
+    private DeltaConfig config;
+    @Autowired
+    private DeltaSignatureUtil signRequest;
     private final ObjectMapper mapper = new ObjectMapper();
 
     public Mono<JsonNode> getBTCPositionDetails() {
-        String path = "/v2/positions/margined";
-        long timestamp = Instant.now().toEpochMilli();
+        try {
+            String endpoint = "/v2/positions";
+            String query = "product_id=" + config.getProductId();
 
-        Map<String, Object> params = new TreeMap<>();
-        params.put("timestamp", timestamp);
+            long timestamp = Instant.now().getEpochSecond();
+            
+            StringBuilder prehash = new StringBuilder();
+            prehash.append("GET").append(timestamp).append(endpoint).append("?").append(query);
+            String signature = signRequest.hmacSHA256(prehash.toString(), config.getApiSecret());
 
-        String signature = DeltaSignatureUtil.signRequest(params, config.getApiSecret());
-        String query = "timestamp=" + timestamp + "&signature=" + signature;
+            StringBuilder endpointWithParams = new StringBuilder();
+            endpointWithParams.append(endpoint).append("?").append(query);
+            WebClient client = webClientService.buildClient(config.getBaseUrl());
 
-        WebClient client = webClientService.buildClient(config.getBaseUrl(), config.getApiKey());
-
-        return client.get()
-                .uri(path + "?" + query)
-                .retrieve()
-                .bodyToMono(String.class)
-                .map(response -> {
-                    consoleLogger.info("Response of PositionDetailsService:::::{}", response);
-                    try {
-                        JsonNode result = mapper.readTree(response).get("result");
-                        for (JsonNode pos : result) {
-                            if (config.getSymbol().equalsIgnoreCase(pos.get("symbol").asText())) {
-                                double size = pos.get("size").asDouble();
-                                double avgPrice = pos.get("entry_price").asDouble();
-                                String side = pos.get("side").asText();
-
-                                consoleLogger.info(
-                                        "Size: {} | Avg Price: {} | Side: {}",
-                                        size,
-                                        avgPrice,
-                                        side.equalsIgnoreCase("buy") ? "LONG" : "SHORT"
-                                );
-                            }
+            return client.get()
+                    .uri(endpointWithParams.toString())
+                    .header("api-key", config.getApiKey())
+                    .header("signature", signature)
+                    .header("timestamp", String.valueOf(timestamp))
+                    .header("Accept", "application/json")
+                    .retrieve()
+                    .bodyToMono(String.class)
+                    .map(response -> {
+                        consoleLogger.info("Response of PositionDetailsService:::::{}", response);
+                        try {
+                            JsonNode json = mapper.readTree(response);
+                            return json.get("result");
+                        } catch (Exception e) {
+                            throw new RuntimeException("Failed to parse position details", e);
                         }
-                        return result;
-                    } catch (Exception e) {
-                        errorLogger.error("Error occurred in PositionDetailsService:::::", e);
-                        throw new RuntimeException("Failed to parse position details", e);
-                    }
-                });
+                    });
+        } catch (Exception e) {
+            errorLogger.error("Error occured in position service:::", e);
+        }
+        return null;
     }
+
 }

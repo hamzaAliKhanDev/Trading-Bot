@@ -39,10 +39,9 @@ public class WebClientService {
                 .build();
     }
 
-    public WebClient buildClient(String baseUrl, String apiKey) {
+    public WebClient buildClient(String baseUrl) {
         return webClientBuilder
                 .baseUrl(baseUrl)
-                .defaultHeader("api-key", apiKey)
                 .build();
     }
 }

@@ -27,5 +27,8 @@ public class DeltaConfig {
 
     @Value("${delta.api.secret}")
     private String apiSecret;
+
+     @Value("${delta.api.productid}")
+    private String productId;
 }
 

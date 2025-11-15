@@ -30,6 +30,7 @@ public class StartBot {
     private static final Logger errorLogger = LogManager.getLogger("Error");
 
     public void startBotMain() {
+
         consoleLogger.info("::::::::::::::::Bot Started:::::::::::::");
 
         Flux.interval(Duration.ofSeconds(config.getLoopInterval()))
@@ -53,5 +54,5 @@ public class StartBot {
             )
             .doOnError(e -> errorLogger.error("[ERROR]:::::", e))
             .subscribe(); // Start consuming the stream
-    }
+            }
 }

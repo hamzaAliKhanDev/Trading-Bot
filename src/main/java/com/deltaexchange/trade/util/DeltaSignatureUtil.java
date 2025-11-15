@@ -5,33 +5,34 @@ import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.stereotype.Service;
 
 import java.nio.charset.StandardCharsets;
-import java.util.Map;
-import java.util.TreeSet;
 
+@Service
 public class DeltaSignatureUtil {
 	
 	private static final Logger consoleLogger = LogManager.getLogger("Console");
 	private static final Logger errorLogger = LogManager.getLogger("Error");
 	
-    public static String signRequest(Map<String, Object> params, String secret) {
+    public String hmacSHA256(String data, String secret) {
         try {
-            StringBuilder payload = new StringBuilder();
-            for (String key : new TreeSet<>(params.keySet())) {
-                payload.append(key).append("=").append(params.get(key)).append("&");
+            Mac sha256_HMAC = Mac.getInstance("HmacSHA256");
+            SecretKeySpec secretKey = new SecretKeySpec(secret.getBytes(StandardCharsets.UTF_8), "HmacSHA256");
+            sha256_HMAC.init(secretKey);
+
+            byte[] hashBytes = sha256_HMAC.doFinal(data.getBytes(StandardCharsets.UTF_8));
+
+            StringBuilder sb = new StringBuilder();
+            for (byte b : hashBytes) {
+                sb.append(String.format("%02x", b));
             }
-            payload.deleteCharAt(payload.length() - 1);
+            return sb.toString();
 
-            Mac mac = Mac.getInstance("HmacSHA256");
-            mac.init(new SecretKeySpec(secret.getBytes(StandardCharsets.UTF_8), "HmacSHA256"));
-            byte[] hash = mac.doFinal(payload.toString().getBytes(StandardCharsets.UTF_8));
-
-            StringBuilder hex = new StringBuilder();
-            for (byte b : hash) hex.append(String.format("%02x", b));
-            return hex.toString();
         } catch (Exception e) {
-            throw new RuntimeException("Failed to sign request", e);
+            System.out.println("Error generating HMAC: " + e.getMessage());
+            e.printStackTrace();
+            return null;
         }
     }
 }
