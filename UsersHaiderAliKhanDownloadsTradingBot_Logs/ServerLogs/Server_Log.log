@@ -1068,3 +1068,67 @@ Consider defining a bean of type 'com.deltaexchange.trade.config.DeltaDto' in yo
 [16 Nov 2025 18:36:29,389 INFO  [/] -DirectJDKLog.java]- Initializing Spring embedded WebApplicationContext
 [16 Nov 2025 18:36:29,392 INFO  ServletWebServerApplicationContext -ServletWebServerApplicationContext.java]- Root WebApplicationContext: initialization completed in 2738 ms
 [16 Nov 2025 18:36:30,731 INFO  TomcatWebServer -TomcatWebServer.java]- Tomcat started on port 8080 (http) with context path '/'
+[17 Nov 2025 01:37:47,696 INFO  TomcatWebServer -TomcatWebServer.java]- Tomcat initialized with port 8080 (http)
+[17 Nov 2025 01:37:47,738 INFO  StandardService -DirectJDKLog.java]- Starting service [Tomcat]
+[17 Nov 2025 01:37:47,739 INFO  StandardEngine -DirectJDKLog.java]- Starting Servlet engine: [Apache Tomcat/10.1.43]
+[17 Nov 2025 01:37:47,866 INFO  [/] -DirectJDKLog.java]- Initializing Spring embedded WebApplicationContext
+[17 Nov 2025 01:37:47,870 INFO  ServletWebServerApplicationContext -ServletWebServerApplicationContext.java]- Root WebApplicationContext: initialization completed in 2573 ms
+[17 Nov 2025 01:37:48,847 WARN  AnnotationConfigServletWebServerApplicationContext -AbstractApplicationContext.java]- Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'botRunner': Unsatisfied dependency expressed through field 'startBot': Error creating bean with name 'startBot': Unsatisfied dependency expressed through field 'orderService': Error creating bean with name 'checkAndOrderService': Unsatisfied dependency expressed through field 'placeOrder': No qualifying bean of type 'com.deltaexchange.trade.service.PlaceOrderService' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+[17 Nov 2025 01:37:48,858 INFO  StandardService -DirectJDKLog.java]- Stopping service [Tomcat]
+[17 Nov 2025 01:37:48,893 INFO  ConditionEvaluationReportLogger -ConditionEvaluationReportLogger.java]- 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+[17 Nov 2025 01:37:48,927 ERROR LoggingFailureAnalysisReporter -LoggingFailureAnalysisReporter.java]- 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Field placeOrder in com.deltaexchange.trade.service.CheckAndOrderService required a bean of type 'com.deltaexchange.trade.service.PlaceOrderService' that could not be found.
+
+The injection point has the following annotations:
+	- @org.springframework.beans.factory.annotation.Autowired(required=true)
+
+
+Action:
+
+Consider defining a bean of type 'com.deltaexchange.trade.service.PlaceOrderService' in your configuration.
+
+[17 Nov 2025 01:40:45,867 INFO  TomcatWebServer -TomcatWebServer.java]- Tomcat initialized with port 8080 (http)
+[17 Nov 2025 01:40:45,895 INFO  StandardService -DirectJDKLog.java]- Starting service [Tomcat]
+[17 Nov 2025 01:40:45,896 INFO  StandardEngine -DirectJDKLog.java]- Starting Servlet engine: [Apache Tomcat/10.1.43]
+[17 Nov 2025 01:40:45,983 INFO  [/] -DirectJDKLog.java]- Initializing Spring embedded WebApplicationContext
+[17 Nov 2025 01:40:45,985 INFO  ServletWebServerApplicationContext -ServletWebServerApplicationContext.java]- Root WebApplicationContext: initialization completed in 1986 ms
+[17 Nov 2025 01:40:47,697 INFO  TomcatWebServer -TomcatWebServer.java]- Tomcat started on port 8080 (http) with context path '/'
+[17 Nov 2025 01:48:36,429 INFO  TomcatWebServer -TomcatWebServer.java]- Tomcat initialized with port 8080 (http)
+[17 Nov 2025 01:48:36,452 INFO  StandardService -DirectJDKLog.java]- Starting service [Tomcat]
+[17 Nov 2025 01:48:36,452 INFO  StandardEngine -DirectJDKLog.java]- Starting Servlet engine: [Apache Tomcat/10.1.43]
+[17 Nov 2025 01:48:36,525 INFO  [/] -DirectJDKLog.java]- Initializing Spring embedded WebApplicationContext
+[17 Nov 2025 01:48:36,528 INFO  ServletWebServerApplicationContext -ServletWebServerApplicationContext.java]- Root WebApplicationContext: initialization completed in 2577 ms
+[17 Nov 2025 01:48:38,207 INFO  TomcatWebServer -TomcatWebServer.java]- Tomcat started on port 8080 (http) with context path '/'
+[17 Nov 2025 01:55:10,866 INFO  TomcatWebServer -TomcatWebServer.java]- Tomcat initialized with port 8080 (http)
+[17 Nov 2025 01:55:10,906 INFO  StandardService -DirectJDKLog.java]- Starting service [Tomcat]
+[17 Nov 2025 01:55:10,907 INFO  StandardEngine -DirectJDKLog.java]- Starting Servlet engine: [Apache Tomcat/10.1.43]
+[17 Nov 2025 01:55:11,023 INFO  [/] -DirectJDKLog.java]- Initializing Spring embedded WebApplicationContext
+[17 Nov 2025 01:55:11,026 INFO  ServletWebServerApplicationContext -ServletWebServerApplicationContext.java]- Root WebApplicationContext: initialization completed in 3183 ms
+[17 Nov 2025 01:55:12,330 INFO  TomcatWebServer -TomcatWebServer.java]- Tomcat started on port 8080 (http) with context path '/'
+[17 Nov 2025 01:58:55,347 INFO  TomcatWebServer -TomcatWebServer.java]- Tomcat initialized with port 8080 (http)
+[17 Nov 2025 01:58:55,369 INFO  StandardService -DirectJDKLog.java]- Starting service [Tomcat]
+[17 Nov 2025 01:58:55,369 INFO  StandardEngine -DirectJDKLog.java]- Starting Servlet engine: [Apache Tomcat/10.1.43]
+[17 Nov 2025 01:58:55,435 INFO  [/] -DirectJDKLog.java]- Initializing Spring embedded WebApplicationContext
+[17 Nov 2025 01:58:55,443 INFO  ServletWebServerApplicationContext -ServletWebServerApplicationContext.java]- Root WebApplicationContext: initialization completed in 2425 ms
+[17 Nov 2025 01:58:56,685 INFO  TomcatWebServer -TomcatWebServer.java]- Tomcat started on port 8080 (http) with context path '/'
+[17 Nov 2025 02:13:39,526 INFO  TomcatWebServer -TomcatWebServer.java]- Tomcat initialized with port 8080 (http)
+[17 Nov 2025 02:13:39,571 INFO  StandardService -DirectJDKLog.java]- Starting service [Tomcat]
+[17 Nov 2025 02:13:39,572 INFO  StandardEngine -DirectJDKLog.java]- Starting Servlet engine: [Apache Tomcat/10.1.43]
+[17 Nov 2025 02:13:39,728 INFO  [/] -DirectJDKLog.java]- Initializing Spring embedded WebApplicationContext
+[17 Nov 2025 02:13:39,762 INFO  ServletWebServerApplicationContext -ServletWebServerApplicationContext.java]- Root WebApplicationContext: initialization completed in 2126 ms
+[17 Nov 2025 02:13:41,026 INFO  TomcatWebServer -TomcatWebServer.java]- Tomcat started on port 8080 (http) with context path '/'
+[17 Nov 2025 02:32:35,353 INFO  TomcatWebServer -TomcatWebServer.java]- Tomcat initialized with port 8080 (http)
+[17 Nov 2025 02:32:35,381 INFO  StandardService -DirectJDKLog.java]- Starting service [Tomcat]
+[17 Nov 2025 02:32:35,381 INFO  StandardEngine -DirectJDKLog.java]- Starting Servlet engine: [Apache Tomcat/10.1.43]
+[17 Nov 2025 02:32:35,463 INFO  [/] -DirectJDKLog.java]- Initializing Spring embedded WebApplicationContext
+[17 Nov 2025 02:32:35,472 INFO  ServletWebServerApplicationContext -ServletWebServerApplicationContext.java]- Root WebApplicationContext: initialization completed in 2347 ms
+[17 Nov 2025 02:32:36,825 INFO  TomcatWebServer -TomcatWebServer.java]- Tomcat started on port 8080 (http) with context path '/'

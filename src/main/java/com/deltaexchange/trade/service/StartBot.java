@@ -103,6 +103,6 @@ public class StartBot {
                     // });
                 })
                 .doOnError(e -> errorLogger.error("[ERROR]:::::", e))
-                .subscribe(); // Start consuming the stream
+                .subscribe(); // Start consuming the stream 
     }
 }

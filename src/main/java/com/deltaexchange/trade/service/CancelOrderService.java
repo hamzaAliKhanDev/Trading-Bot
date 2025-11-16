@@ -44,7 +44,7 @@ public class CancelOrderService {
             StringBuilder endpointWithParams = new StringBuilder();
             endpointWithParams.append(endpoint).append("?").append(query);
             WebClient client = webClientService.buildClient(config.getBaseUrl());
-
+            consoleLogger.info("before canel all orders::");
             return client.delete()
                     .uri(endpointWithParams.toString())
                     .header("api-key", config.getApiKey())

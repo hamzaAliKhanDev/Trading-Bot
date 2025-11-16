@@ -7,9 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.deltaexchange.trade.config.DeltaDto;
-import com.fasterxml.jackson.databind.JsonNode;
-
-import reactor.core.publisher.Mono;
 
 @Service
 public class CheckAndOrderService {
@@ -30,31 +27,41 @@ public class CheckAndOrderService {
     public JSONObject executionMain(String entryPrice, int size) {
         try {
             // Cancels All Orders
-            Mono<JsonNode> cancelOrdersNode = cancelAllOrders.cancelExistingOrders();
-            JSONObject cancelOrdersResponse = new JSONObject(cancelOrdersNode.toString());
-            boolean apiSuccess = cancelOrdersResponse.getBoolean("success");
-            if (!apiSuccess) {
-                consoleLogger.info(":::::::::Cancel Order service returned success false::::::::::::");
-                return cancelOrdersResponse;
-            }else{
-                transactionLogger.info("Cancelled All Previous Orders for EntryPrice->{}, Size->{}:::::",entryPrice,size);
-            }
+            cancelAllOrders.cancelExistingOrders().subscribe(cancelOrdersNode -> {
+                consoleLogger.info("cancelOrdersNode:::::{}", cancelOrdersNode);
+
+                JSONObject cancelOrdersResponse = new JSONObject(cancelOrdersNode.toString());
+                boolean apiSuccess = cancelOrdersResponse.getBoolean("success");
+
+                if (!apiSuccess) {
+                    consoleLogger.info(":::::::::Cancel Order service returned success false::::::::::::");
+                } else {
+                    transactionLogger.info(
+                            "Cancelled All Previous Orders for EntryPrice->{}, Size->{}:::::",
+                            entryPrice,
+                            size);
+                }
+            });
 
             // Set Leverage of Orders
             int leverage = returnLeverage(size);
-            Mono<JsonNode> setLeverageNode = setOrderLeverage.setOrderLeverage(leverage);
-            JSONObject setLeverageResponse = new JSONObject(setLeverageNode.toString());
-            apiSuccess = false;
-            apiSuccess = setLeverageResponse.getBoolean("success");
-            if (!apiSuccess) {
-                consoleLogger.info(":::::::::Set Leverage Service returned success false::::::::::::");
-                return setLeverageResponse;
-            }else{
-                transactionLogger.info("Leverage Set Successfully Orders for EntryPrice->{}, Size->{}, Leverage->{}:::::",entryPrice,size,leverage);
-            }
+            setOrderLeverage.setOrderLeverage(leverage).subscribe(setLeverageNode -> {
+                JSONObject setLeverageResponse = new JSONObject(setLeverageNode.toString());
+                boolean apiSuccess = setLeverageResponse.getBoolean("success");
+
+                if (!apiSuccess) {
+                    consoleLogger.info(":::::::::Set Leverage Service returned success false::::::::::::");
+                } else {
+                    transactionLogger.info(
+                            "Leverage Set Successfully Orders for EntryPrice->{}, Size->{}, Leverage->{}:::::",
+                            entryPrice,
+                            size,
+                            leverage);
+                }
+            });
 
             // Place Orders
-            return placeOrder(entryPrice, size);
+            placeOrder(entryPrice, size);
 
         } catch (Exception e) {
             errorLogger.error("Error occured in Check and Order Service:::::", e);
@@ -91,70 +98,85 @@ public class CheckAndOrderService {
         return leverage;
     }
 
-    public JSONObject placeOrder(String entryPrice, int size) {
-       JSONObject response = null;
-       double entryPriceDouble = Double.valueOf(entryPrice);
-        switch (size) {
-            case 2:
-                response = executeOrder(String.valueOf(entryPriceDouble+500), 4, "sell");
-                globalVars.setTpPrice(entryPriceDouble+500);
+    public void placeOrder(String entryPrice, int size) {
 
-                response = executeOrder(String.valueOf(entryPriceDouble-750), 4, "buy");
-                globalVars.setAvgPrice(entryPriceDouble-750);                
-                break;
-            case -2:
-                response = executeOrder(String.valueOf(entryPriceDouble-500), 4, "buy");
-                globalVars.setTpPrice(entryPriceDouble-500);
+    double entryPriceDouble = Double.parseDouble(entryPrice);
 
-                response = executeOrder(String.valueOf(entryPriceDouble+750), 4, "sell");
-                globalVars.setAvgPrice(entryPriceDouble+750); 
-                break;
-            case 6:
-                response = executeOrder(String.valueOf(entryPriceDouble+500), 8, "sell");
-                globalVars.setTpPrice(entryPriceDouble+500);
+    switch (size) {
 
-                response = executeOrder(String.valueOf(entryPriceDouble-750), 12, "buy");
-                globalVars.setAvgPrice(entryPriceDouble-750);       
-                break;
-            case -6:
-                response = executeOrder(String.valueOf(entryPriceDouble-500), 8, "buy");
-                globalVars.setTpPrice(entryPriceDouble-500);
+        case 2:
+            executeOrder(String.valueOf(entryPriceDouble + 500), 4, "sell");
+            globalVars.setTpPrice(entryPriceDouble + 500);
 
-                response = executeOrder(String.valueOf(entryPriceDouble+750), 12, "sell");
-                globalVars.setAvgPrice(entryPriceDouble+750); 
-                break;
-            case 18:
-                response = executeOrder(String.valueOf(entryPriceDouble+200), 18, "sell");
-                globalVars.setTpPrice(entryPriceDouble+200);
+            executeOrder(String.valueOf(entryPriceDouble - 750), 4, "buy");
+            globalVars.setAvgPrice(entryPriceDouble - 750);
+            break;
 
-                response = executeOrder(String.valueOf(entryPriceDouble-750), 36, "buy");
-                globalVars.setAvgPrice(entryPriceDouble-750);       
-                break;
-            case -18:
-                response = executeOrder(String.valueOf(entryPriceDouble-200), 18, "buy");
-                globalVars.setTpPrice(entryPriceDouble-200);
+        case -2:
+            executeOrder(String.valueOf(entryPriceDouble - 500), 4, "buy");
+            globalVars.setTpPrice(entryPriceDouble - 500);
 
-                response = executeOrder(String.valueOf(entryPriceDouble+750), 36, "sell");
-                globalVars.setAvgPrice(entryPriceDouble+750); 
-                break;
-        }
+            executeOrder(String.valueOf(entryPriceDouble + 750), 4, "sell");
+            globalVars.setAvgPrice(entryPriceDouble + 750);
+            break;
 
-        return response;
+        case 6:
+            executeOrder(String.valueOf(entryPriceDouble + 500), 8, "sell");
+            globalVars.setTpPrice(entryPriceDouble + 500);
+
+            executeOrder(String.valueOf(entryPriceDouble - 750), 12, "buy");
+            globalVars.setAvgPrice(entryPriceDouble - 750);
+            break;
+
+        case -6:
+            executeOrder(String.valueOf(entryPriceDouble - 500), 8, "buy");
+            globalVars.setTpPrice(entryPriceDouble - 500);
+
+            executeOrder(String.valueOf(entryPriceDouble + 750), 12, "sell");
+            globalVars.setAvgPrice(entryPriceDouble + 750);
+            break;
+
+        case 18:
+            executeOrder(String.valueOf(entryPriceDouble + 200), 18, "sell");
+            globalVars.setTpPrice(entryPriceDouble + 200);
+
+            executeOrder(String.valueOf(entryPriceDouble - 750), 36, "buy");
+            globalVars.setAvgPrice(entryPriceDouble - 750);
+            break;
+
+        case -18:
+            executeOrder(String.valueOf(entryPriceDouble - 200), 18, "buy");
+            globalVars.setTpPrice(entryPriceDouble - 200);
+
+            executeOrder(String.valueOf(entryPriceDouble + 750), 36, "sell");
+            globalVars.setAvgPrice(entryPriceDouble + 750);
+            break;
     }
+}
 
-    public JSONObject executeOrder(String limitPrice, int size, String side) {
-        
-        Mono<JsonNode> placeOrderNode = placeOrder.placeOrder(limitPrice, size, side);
+    public void executeOrder(String limitPrice, int size, String side) {
+
+    placeOrder.placeOrder(limitPrice, size, side).subscribe(placeOrderNode -> {
+
         JSONObject placeOrderResponse = new JSONObject(placeOrderNode.toString());
         boolean apiSuccess = placeOrderResponse.getBoolean("success");
+
         if (!apiSuccess) {
             consoleLogger.info(
                     ":::::::::Place Order service returned false for LimitPrice->{}, Size->{}, Side->{}:::::::",
-                    limitPrice, size, side);
-        }else{
-                transactionLogger.info("Order Placed Successfully with Details:- \n Side->{}, \n LimitPrice->{}, \n Size->{}:::::",side,limitPrice,size);
-            }
-        return placeOrderResponse;
-    }
+                    limitPrice, size, side
+            );
+        } else {
+            transactionLogger.info(
+                    "Order Placed Successfully with Details:- \n Side->{}, \n LimitPrice->{}, \n Size->{}:::::",
+                    side, limitPrice, size
+            );
+        }
+
+    }, error -> {
+        errorLogger.error("Error placing order:", error);
+    });
+}
+
 
 }
