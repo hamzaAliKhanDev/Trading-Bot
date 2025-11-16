@@ -1,22 +1,21 @@
 package com.deltaexchange.trade.service;
 
+import java.time.Instant;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.reactive.function.client.WebClient;
+
 import com.deltaexchange.trade.config.DeltaConfig;
 import com.deltaexchange.trade.util.DeltaSignatureUtil;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.RequiredArgsConstructor;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.WebClient;
+
 import reactor.core.publisher.Mono;
 
-import java.time.Instant;
-
-@Service
-@RequiredArgsConstructor
-public class PositionService {
+public class PlaceOrderService {
 
     private static final Logger consoleLogger = LogManager.getLogger("Console");
     private static final Logger errorLogger = LogManager.getLogger("Error");
@@ -29,42 +28,50 @@ public class PositionService {
     private DeltaSignatureUtil signRequest;
     private final ObjectMapper mapper = new ObjectMapper();
 
-    public Mono<JsonNode> getBTCPositionDetails() {
+    public Mono<JsonNode> placeOrder(String limitPrice, int size, String side) {
         try {
-            String endpoint = "/v2/positions";
-            String query = "product_id=" + config.getProductId();
+            String endpoint = "/v2/orders";
+            String query = "";
 
             long timestamp = Instant.now().getEpochSecond();
             
             StringBuilder prehash = new StringBuilder();
-            prehash.append("GET").append(timestamp).append(endpoint).append("?").append(query);
+            prehash.append("POST").append(timestamp).append(endpoint).append("?").append(query);
             String signature = signRequest.hmacSHA256(prehash.toString(), config.getApiSecret());
 
             StringBuilder endpointWithParams = new StringBuilder();
             endpointWithParams.append(endpoint).append("?").append(query);
             WebClient client = webClientService.buildClient(config.getBaseUrl());
 
-            return client.get()
+            JSONObject inputBody = new JSONObject();
+            inputBody.put("product_id", config.getProductId());
+            inputBody.put("product_symbol", config.getSymbol());
+            inputBody.put("limit_price", limitPrice);
+            inputBody.put("size", size);
+            inputBody.put("side", side);
+            inputBody.put("order_type", "limit_order");
+
+            return client.post()
                     .uri(endpointWithParams.toString())
                     .header("api-key", config.getApiKey())
                     .header("signature", signature)
                     .header("timestamp", String.valueOf(timestamp))
                     .header("Accept", "application/json")
+                    .bodyValue(inputBody)
                     .retrieve()
                     .bodyToMono(String.class)
                     .map(response -> {
-                        consoleLogger.info("Response of PositionDetailsService:::::{}", response);
+                        consoleLogger.info("Response of Order Service:::::{}", response);
                         try {
                             JsonNode json = mapper.readTree(response);
                             return json;
                         } catch (Exception e) {
-                            throw new RuntimeException("Failed to parse position details", e);
+                            throw new RuntimeException("Failed to parse Order Service response", e);
                         }
                     });
         } catch (Exception e) {
-            errorLogger.error("Error occured in position service:::", e);
+            errorLogger.error("Error occured in Order Service:::", e);
         }
         return null;
     }
-
 }

@@ -4,55 +4,105 @@ import java.time.Duration;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.deltaexchange.trade.config.DeltaConfig;
+import com.deltaexchange.trade.config.DeltaDto;
 
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 
 @Service
 @RequiredArgsConstructor
 public class StartBot {
 
     @Autowired
-    PriceService priceService;
+    private PositionService positionService;
 
     @Autowired
-    PositionService positionService;
+    private DeltaConfig config;
 
     @Autowired
-    DeltaConfig config;
+    private DeltaDto globalVar;
+
+    @Autowired
+    private CheckAndOrderService orderService;
 
     private static final Logger consoleLogger = LogManager.getLogger("Console");
     private static final Logger errorLogger = LogManager.getLogger("Error");
+    private static final Logger transactionLogger = LogManager.getLogger("Transaction");
 
     public void startBotMain() {
 
         consoleLogger.info("::::::::::::::::Bot Started:::::::::::::");
 
         Flux.interval(Duration.ofSeconds(config.getLoopInterval()))
-            .flatMap(tick -> 
-                priceService.getLatestPrice(config.getSymbol())  // Mono<Double>
-                    .flatMap(price -> {
-                        consoleLogger.info("[BOT] Current BTC Price:::{}", price);
+                .flatMap(tick -> {
 
-                        // Chain positionService AFTER price is fetched
-                        return positionService.getBTCPositionDetails()
-                                .doOnNext(position -> {
-                                    consoleLogger.info("[BOT] Position data received for tick {}: {}", tick, position);
-                                    
-                                    // Example Strategy:
-                                    // if (price < 60000) {
-                                    //     consoleLogger.info("[BOT] Price below threshold — would place BUY order here.");
-                                    //     orderService.placeOrder("buy", config.getOrderSize(), null, "market");
-                                    // }
-                                });
-                    })
-            )
-            .doOnError(e -> errorLogger.error("[ERROR]:::::", e))
-            .subscribe(); // Start consuming the stream
-            }
+                    // If needed later:
+                    // return priceService.getLatestPrice(config.getSymbol())
+                    // .flatMap(price -> {
+
+                    return positionService.getBTCPositionDetails()
+                            .doOnNext(position -> {
+
+                                consoleLogger.info("[BOT] Position data received for tick {}: {}", tick, position);
+
+                                if (position != null) {
+
+                                    JSONObject positionServiceResponse = new JSONObject(position.toString());
+
+                                    boolean apiSuccess = positionServiceResponse.getBoolean("success");
+
+                                    if (apiSuccess) {
+
+                                        JSONObject result = positionServiceResponse.getJSONObject("result");
+
+                                        if (result != null && !result.isEmpty()) {
+                                            String entryPriceStr = result.getString("entry_price");
+                                            Double entryPrice = Double.valueOf(entryPriceStr);
+
+                                            int size = result.getInt("size");
+                                            consoleLogger.info("Current TP Price::::{}",globalVar.getTpPrice());
+                                            consoleLogger.info("Current Avg Price::::{}",globalVar.getAvgPrice());
+                                            if (globalVar.getTpPrice() == 0
+                                                    || globalVar.getAvgPrice() == 0
+                                                    || entryPrice.equals(globalVar.getTpPrice())
+                                                    || entryPrice.equals(globalVar.getAvgPrice())) {
+
+                                                /**
+                                                 * 1. Cancel All Orders
+                                                 * 2. Set leverage
+                                                 * 3. Place the TP and Avg Order
+                                                 */
+                                                transactionLogger.info("::::::::::::::::::::::::::::::::::New Order execution Started:::::::::::::::::::::::::::::::::::");
+                                                transactionLogger.info("Details of Current Order:- \n EntryPrice->{}, \n Size->{}, \n CurrentTpPrice->{}, \n CurrentAvgPrice->{}:::::",entryPrice,size,globalVar.getTpPrice(),globalVar.getAvgPrice());
+
+                                                orderService.executionMain(entryPriceStr, size);
+                                                transactionLogger.info("::::::::::::::::::::::::::::::::::New Order execution Ended:::::::::::::::::::::::::::::::::::");
+
+                                            } else {
+                                                consoleLogger.info(
+                                                        "::::::::::::::No TP/Avg price met. Going for another tick:::::::::::");
+                                            }
+
+                                        }
+
+                                    } else {
+                                        consoleLogger.info(
+                                                ":::::::::::Position Service API Failed with success flag as False::::::::::::");
+                                    }
+
+                                } else {
+                                    consoleLogger.info(
+                                            ":::::::::::::No response returned from position service:::::::::");
+                                }
+                            });
+                    // });
+                })
+                .doOnError(e -> errorLogger.error("[ERROR]:::::", e))
+                .subscribe(); // Start consuming the stream
+    }
 }
