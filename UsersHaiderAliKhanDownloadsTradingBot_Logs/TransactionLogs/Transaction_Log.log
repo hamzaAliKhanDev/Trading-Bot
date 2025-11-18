@@ -1,17 +1,420 @@
-[17 Nov 2025 02:32:44,267 INFO  Transaction -StartBot.java]- ::::::::::::::::::::::::::::::::::New Order execution Started:::::::::::::::::::::::::::::::::::
-[17 Nov 2025 02:32:44,267 INFO  Transaction -StartBot.java]- Details of Current Order:- 
- EntryPrice->94250.0, 
- Size->6, 
+[19 Nov 2025 00:24:08,558 INFO  Transaction -StartBot.java]- ::::::::::::::::::::::::::::::::::New Order execution Started:::::::::::::::::::::::::::::::::::
+[19 Nov 2025 00:24:08,559 INFO  Transaction -StartBot.java]- Details of Current Order:- 
+ EntryPrice->93014.0, 
+ Size->-2, 
  CurrentTpPrice->0.0, 
  CurrentAvgPrice->0.0:::::
-[17 Nov 2025 02:32:44,301 INFO  Transaction -StartBot.java]- ::::::::::::::::::::::::::::::::::New Order execution Ended:::::::::::::::::::::::::::::::::::
-[17 Nov 2025 02:32:47,065 ERROR Operators -Loggers.java]- Operator called default onErrorDropped
-reactor.core.Exceptions$ErrorCallbackNotImplemented: org.springframework.web.reactive.function.client.WebClientResponseException$InternalServerError: 500 Internal Server Error from DELETE https://api.india.delta.exchange/v2/orders/all
-Caused by: org.springframework.web.reactive.function.client.WebClientResponseException$InternalServerError: 500 Internal Server Error from DELETE https://api.india.delta.exchange/v2/orders/all
+[19 Nov 2025 00:24:08,574 INFO  Transaction -StartBot.java]- ::::::::::::::::::::::::::::::::::New Order execution Ended:::::::::::::::::::::::::::::::::::
+[19 Nov 2025 00:24:10,085 INFO  Transaction -CheckAndOrderService.java]- Cancelled All Previous Orders for EntryPrice->93014.00000000, Size->-2:::::
+[19 Nov 2025 00:24:10,339 ERROR Operators -Loggers.java]- Operator called default onErrorDropped
+reactor.core.Exceptions$ErrorCallbackNotImplemented: org.springframework.web.reactive.function.client.WebClientResponseException$Unauthorized: 401 Unauthorized from POST https://api.india.delta.exchange/v2/products/27/orders/leverage
+Caused by: org.springframework.web.reactive.function.client.WebClientResponseException$Unauthorized: 401 Unauthorized from POST https://api.india.delta.exchange/v2/products/27/orders/leverage
+	at org.springframework.web.reactive.function.client.WebClientResponseException.create(WebClientResponseException.java:322) ~[spring-webflux-6.2.9.jar:6.2.9]
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ? 401 UNAUTHORIZED from POST https://api.india.delta.exchange/v2/products/27/orders/leverage [DefaultWebClient]
+Original Stack Trace:
+		at org.springframework.web.reactive.function.client.WebClientResponseException.create(WebClientResponseException.java:322) ~[spring-webflux-6.2.9.jar:6.2.9]
+		at org.springframework.web.reactive.function.client.DefaultClientResponse.lambda$createException$1(DefaultClientResponse.java:214) ~[spring-webflux-6.2.9.jar:6.2.9]
+		at reactor.core.publisher.FluxMap$MapSubscriber.onNext(FluxMap.java:106) ~[reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxOnErrorReturn$ReturnSubscriber.onNext(FluxOnErrorReturn.java:162) ~[reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxDefaultIfEmpty$DefaultIfEmptySubscriber.onNext(FluxDefaultIfEmpty.java:122) ~[reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.onNext(FluxMapFuseable.java:129) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxContextWrite$ContextWriteSubscriber.onNext(FluxContextWrite.java:107) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxMapFuseable$MapFuseableConditionalSubscriber.onNext(FluxMapFuseable.java:299) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxFilterFuseable$FilterFuseableConditionalSubscriber.onNext(FluxFilterFuseable.java:337) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.Operators$BaseFluxToMonoOperator.completePossiblyEmpty(Operators.java:2096) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.MonoCollect$CollectSubscriber.onComplete(MonoCollect.java:145) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxMap$MapSubscriber.onComplete(FluxMap.java:144) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxPeek$PeekSubscriber.onComplete(FluxPeek.java:260) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxMap$MapSubscriber.onComplete(FluxMap.java:144) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.netty.channel.FluxReceive.onInboundComplete(FluxReceive.java:413) [reactor-netty-core-1.2.8.jar:1.2.8]
+		at reactor.netty.channel.ChannelOperations.onInboundComplete(ChannelOperations.java:455) [reactor-netty-core-1.2.8.jar:1.2.8]
+		at reactor.netty.channel.ChannelOperations.terminate(ChannelOperations.java:509) [reactor-netty-core-1.2.8.jar:1.2.8]
+		at reactor.netty.http.client.HttpClientOperations.onInboundNext(HttpClientOperations.java:821) [reactor-netty-http-1.2.8.jar:1.2.8]
+		at reactor.netty.channel.ChannelOperationsHandler.channelRead(ChannelOperationsHandler.java:115) [reactor-netty-core-1.2.8.jar:1.2.8]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.CombinedChannelDuplexHandler$DelegatingChannelHandlerContext.fireChannelRead(CombinedChannelDuplexHandler.java:436) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:346) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:318) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.CombinedChannelDuplexHandler.channelRead(CombinedChannelDuplexHandler.java:251) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:442) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.ssl.SslHandler.unwrap(SslHandler.java:1519) [netty-handler-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.ssl.SslHandler.decodeJdkCompatible(SslHandler.java:1377) [netty-handler-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.ssl.SslHandler.decode(SslHandler.java:1428) [netty-handler-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.decodeRemovalReentryProtection(ByteToMessageDecoder.java:530) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.callDecode(ByteToMessageDecoder.java:469) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:290) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1357) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:440) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:868) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:166) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:796) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:732) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:658) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:998) [netty-common-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) [netty-common-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) [netty-common-4.1.123.Final.jar:4.1.123.Final]
+		at java.base/java.lang.Thread.run(Thread.java:842) [?:?]
+[19 Nov 2025 00:24:12,090 INFO  Transaction -StartBot.java]- ::::::::::::::::::::::::::::::::::New Order execution Started:::::::::::::::::::::::::::::::::::
+[19 Nov 2025 00:24:12,091 INFO  Transaction -StartBot.java]- Details of Current Order:- 
+ EntryPrice->93014.0, 
+ Size->-2, 
+ CurrentTpPrice->0.0, 
+ CurrentAvgPrice->0.0:::::
+[19 Nov 2025 00:24:12,091 INFO  Transaction -StartBot.java]- ::::::::::::::::::::::::::::::::::New Order execution Ended:::::::::::::::::::::::::::::::::::
+[19 Nov 2025 00:24:12,266 INFO  Transaction -CheckAndOrderService.java]- Cancelled All Previous Orders for EntryPrice->93014.00000000, Size->-2:::::
+[19 Nov 2025 00:24:12,433 ERROR Operators -Loggers.java]- Operator called default onErrorDropped
+reactor.core.Exceptions$ErrorCallbackNotImplemented: org.springframework.web.reactive.function.client.WebClientResponseException$Unauthorized: 401 Unauthorized from POST https://api.india.delta.exchange/v2/products/27/orders/leverage
+Caused by: org.springframework.web.reactive.function.client.WebClientResponseException$Unauthorized: 401 Unauthorized from POST https://api.india.delta.exchange/v2/products/27/orders/leverage
+	at org.springframework.web.reactive.function.client.WebClientResponseException.create(WebClientResponseException.java:322) ~[spring-webflux-6.2.9.jar:6.2.9]
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ? 401 UNAUTHORIZED from POST https://api.india.delta.exchange/v2/products/27/orders/leverage [DefaultWebClient]
+Original Stack Trace:
+		at org.springframework.web.reactive.function.client.WebClientResponseException.create(WebClientResponseException.java:322) ~[spring-webflux-6.2.9.jar:6.2.9]
+		at org.springframework.web.reactive.function.client.DefaultClientResponse.lambda$createException$1(DefaultClientResponse.java:214) ~[spring-webflux-6.2.9.jar:6.2.9]
+		at reactor.core.publisher.FluxMap$MapSubscriber.onNext(FluxMap.java:106) ~[reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxOnErrorReturn$ReturnSubscriber.onNext(FluxOnErrorReturn.java:162) ~[reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxDefaultIfEmpty$DefaultIfEmptySubscriber.onNext(FluxDefaultIfEmpty.java:122) ~[reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.onNext(FluxMapFuseable.java:129) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxContextWrite$ContextWriteSubscriber.onNext(FluxContextWrite.java:107) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxMapFuseable$MapFuseableConditionalSubscriber.onNext(FluxMapFuseable.java:299) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxFilterFuseable$FilterFuseableConditionalSubscriber.onNext(FluxFilterFuseable.java:337) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.Operators$BaseFluxToMonoOperator.completePossiblyEmpty(Operators.java:2096) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.MonoCollect$CollectSubscriber.onComplete(MonoCollect.java:145) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxMap$MapSubscriber.onComplete(FluxMap.java:144) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxPeek$PeekSubscriber.onComplete(FluxPeek.java:260) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxMap$MapSubscriber.onComplete(FluxMap.java:144) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.netty.channel.FluxReceive.onInboundComplete(FluxReceive.java:413) [reactor-netty-core-1.2.8.jar:1.2.8]
+		at reactor.netty.channel.ChannelOperations.onInboundComplete(ChannelOperations.java:455) [reactor-netty-core-1.2.8.jar:1.2.8]
+		at reactor.netty.channel.ChannelOperations.terminate(ChannelOperations.java:509) [reactor-netty-core-1.2.8.jar:1.2.8]
+		at reactor.netty.http.client.HttpClientOperations.onInboundNext(HttpClientOperations.java:821) [reactor-netty-http-1.2.8.jar:1.2.8]
+		at reactor.netty.channel.ChannelOperationsHandler.channelRead(ChannelOperationsHandler.java:115) [reactor-netty-core-1.2.8.jar:1.2.8]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.CombinedChannelDuplexHandler$DelegatingChannelHandlerContext.fireChannelRead(CombinedChannelDuplexHandler.java:436) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:346) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:318) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.CombinedChannelDuplexHandler.channelRead(CombinedChannelDuplexHandler.java:251) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:442) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.ssl.SslHandler.unwrap(SslHandler.java:1519) [netty-handler-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.ssl.SslHandler.decodeJdkCompatible(SslHandler.java:1377) [netty-handler-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.ssl.SslHandler.decode(SslHandler.java:1428) [netty-handler-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.decodeRemovalReentryProtection(ByteToMessageDecoder.java:530) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.callDecode(ByteToMessageDecoder.java:469) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:290) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1357) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:440) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:868) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:166) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:796) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:732) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:658) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:998) [netty-common-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) [netty-common-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) [netty-common-4.1.123.Final.jar:4.1.123.Final]
+		at java.base/java.lang.Thread.run(Thread.java:842) [?:?]
+[19 Nov 2025 00:29:19,894 INFO  Transaction -StartBot.java]- ::::::::::::::::::::::::::::::::::New Order execution Started:::::::::::::::::::::::::::::::::::
+[19 Nov 2025 00:29:19,895 INFO  Transaction -StartBot.java]- Details of Current Order:- 
+ EntryPrice->93014.0, 
+ Size->-2, 
+ CurrentTpPrice->0.0, 
+ CurrentAvgPrice->0.0:::::
+[19 Nov 2025 00:29:19,907 INFO  Transaction -StartBot.java]- ::::::::::::::::::::::::::::::::::New Order execution Ended:::::::::::::::::::::::::::::::::::
+[19 Nov 2025 00:29:21,492 INFO  Transaction -CheckAndOrderService.java]- Cancelled All Previous Orders for EntryPrice->93014.00000000, Size->-2:::::
+[19 Nov 2025 00:29:22,110 ERROR Operators -Loggers.java]- Operator called default onErrorDropped
+reactor.core.Exceptions$ErrorCallbackNotImplemented: org.springframework.web.reactive.function.client.WebClientResponseException$Unauthorized: 401 Unauthorized from POST https://api.india.delta.exchange/v2/products/27/orders/leverage
+Caused by: org.springframework.web.reactive.function.client.WebClientResponseException$Unauthorized: 401 Unauthorized from POST https://api.india.delta.exchange/v2/products/27/orders/leverage
+	at org.springframework.web.reactive.function.client.WebClientResponseException.create(WebClientResponseException.java:322) ~[spring-webflux-6.2.9.jar:6.2.9]
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ? 401 UNAUTHORIZED from POST https://api.india.delta.exchange/v2/products/27/orders/leverage [DefaultWebClient]
+Original Stack Trace:
+		at org.springframework.web.reactive.function.client.WebClientResponseException.create(WebClientResponseException.java:322) ~[spring-webflux-6.2.9.jar:6.2.9]
+		at org.springframework.web.reactive.function.client.DefaultClientResponse.lambda$createException$1(DefaultClientResponse.java:214) ~[spring-webflux-6.2.9.jar:6.2.9]
+		at reactor.core.publisher.FluxMap$MapSubscriber.onNext(FluxMap.java:106) ~[reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxOnErrorReturn$ReturnSubscriber.onNext(FluxOnErrorReturn.java:162) ~[reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxDefaultIfEmpty$DefaultIfEmptySubscriber.onNext(FluxDefaultIfEmpty.java:122) ~[reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.onNext(FluxMapFuseable.java:129) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxContextWrite$ContextWriteSubscriber.onNext(FluxContextWrite.java:107) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxMapFuseable$MapFuseableConditionalSubscriber.onNext(FluxMapFuseable.java:299) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxFilterFuseable$FilterFuseableConditionalSubscriber.onNext(FluxFilterFuseable.java:337) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.Operators$BaseFluxToMonoOperator.completePossiblyEmpty(Operators.java:2096) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.MonoCollect$CollectSubscriber.onComplete(MonoCollect.java:145) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxMap$MapSubscriber.onComplete(FluxMap.java:144) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxPeek$PeekSubscriber.onComplete(FluxPeek.java:260) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxMap$MapSubscriber.onComplete(FluxMap.java:144) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.netty.channel.FluxReceive.onInboundComplete(FluxReceive.java:413) [reactor-netty-core-1.2.8.jar:1.2.8]
+		at reactor.netty.channel.ChannelOperations.onInboundComplete(ChannelOperations.java:455) [reactor-netty-core-1.2.8.jar:1.2.8]
+		at reactor.netty.channel.ChannelOperations.terminate(ChannelOperations.java:509) [reactor-netty-core-1.2.8.jar:1.2.8]
+		at reactor.netty.http.client.HttpClientOperations.onInboundNext(HttpClientOperations.java:821) [reactor-netty-http-1.2.8.jar:1.2.8]
+		at reactor.netty.channel.ChannelOperationsHandler.channelRead(ChannelOperationsHandler.java:115) [reactor-netty-core-1.2.8.jar:1.2.8]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.CombinedChannelDuplexHandler$DelegatingChannelHandlerContext.fireChannelRead(CombinedChannelDuplexHandler.java:436) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:346) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:318) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.CombinedChannelDuplexHandler.channelRead(CombinedChannelDuplexHandler.java:251) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:442) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.ssl.SslHandler.unwrap(SslHandler.java:1519) [netty-handler-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.ssl.SslHandler.decodeJdkCompatible(SslHandler.java:1377) [netty-handler-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.ssl.SslHandler.decode(SslHandler.java:1428) [netty-handler-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.decodeRemovalReentryProtection(ByteToMessageDecoder.java:530) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.callDecode(ByteToMessageDecoder.java:469) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:290) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1357) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:440) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:868) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:166) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:796) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:732) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:658) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:998) [netty-common-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) [netty-common-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) [netty-common-4.1.123.Final.jar:4.1.123.Final]
+		at java.base/java.lang.Thread.run(Thread.java:842) [?:?]
+[19 Nov 2025 00:29:24,008 INFO  Transaction -StartBot.java]- ::::::::::::::::::::::::::::::::::New Order execution Started:::::::::::::::::::::::::::::::::::
+[19 Nov 2025 00:29:24,009 INFO  Transaction -StartBot.java]- Details of Current Order:- 
+ EntryPrice->93014.0, 
+ Size->-2, 
+ CurrentTpPrice->0.0, 
+ CurrentAvgPrice->0.0:::::
+[19 Nov 2025 00:29:24,016 INFO  Transaction -StartBot.java]- ::::::::::::::::::::::::::::::::::New Order execution Ended:::::::::::::::::::::::::::::::::::
+[19 Nov 2025 00:29:24,210 INFO  Transaction -CheckAndOrderService.java]- Cancelled All Previous Orders for EntryPrice->93014.00000000, Size->-2:::::
+[19 Nov 2025 00:29:24,413 ERROR Operators -Loggers.java]- Operator called default onErrorDropped
+reactor.core.Exceptions$ErrorCallbackNotImplemented: org.springframework.web.reactive.function.client.WebClientResponseException$Unauthorized: 401 Unauthorized from POST https://api.india.delta.exchange/v2/products/27/orders/leverage
+Caused by: org.springframework.web.reactive.function.client.WebClientResponseException$Unauthorized: 401 Unauthorized from POST https://api.india.delta.exchange/v2/products/27/orders/leverage
+	at org.springframework.web.reactive.function.client.WebClientResponseException.create(WebClientResponseException.java:322) ~[spring-webflux-6.2.9.jar:6.2.9]
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ? 401 UNAUTHORIZED from POST https://api.india.delta.exchange/v2/products/27/orders/leverage [DefaultWebClient]
+Original Stack Trace:
+		at org.springframework.web.reactive.function.client.WebClientResponseException.create(WebClientResponseException.java:322) ~[spring-webflux-6.2.9.jar:6.2.9]
+		at org.springframework.web.reactive.function.client.DefaultClientResponse.lambda$createException$1(DefaultClientResponse.java:214) ~[spring-webflux-6.2.9.jar:6.2.9]
+		at reactor.core.publisher.FluxMap$MapSubscriber.onNext(FluxMap.java:106) ~[reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxOnErrorReturn$ReturnSubscriber.onNext(FluxOnErrorReturn.java:162) ~[reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxDefaultIfEmpty$DefaultIfEmptySubscriber.onNext(FluxDefaultIfEmpty.java:122) ~[reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.onNext(FluxMapFuseable.java:129) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxContextWrite$ContextWriteSubscriber.onNext(FluxContextWrite.java:107) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxMapFuseable$MapFuseableConditionalSubscriber.onNext(FluxMapFuseable.java:299) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxFilterFuseable$FilterFuseableConditionalSubscriber.onNext(FluxFilterFuseable.java:337) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.Operators$BaseFluxToMonoOperator.completePossiblyEmpty(Operators.java:2096) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.MonoCollect$CollectSubscriber.onComplete(MonoCollect.java:145) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxMap$MapSubscriber.onComplete(FluxMap.java:144) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxPeek$PeekSubscriber.onComplete(FluxPeek.java:260) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxMap$MapSubscriber.onComplete(FluxMap.java:144) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.netty.channel.FluxReceive.onInboundComplete(FluxReceive.java:413) [reactor-netty-core-1.2.8.jar:1.2.8]
+		at reactor.netty.channel.ChannelOperations.onInboundComplete(ChannelOperations.java:455) [reactor-netty-core-1.2.8.jar:1.2.8]
+		at reactor.netty.channel.ChannelOperations.terminate(ChannelOperations.java:509) [reactor-netty-core-1.2.8.jar:1.2.8]
+		at reactor.netty.http.client.HttpClientOperations.onInboundNext(HttpClientOperations.java:821) [reactor-netty-http-1.2.8.jar:1.2.8]
+		at reactor.netty.channel.ChannelOperationsHandler.channelRead(ChannelOperationsHandler.java:115) [reactor-netty-core-1.2.8.jar:1.2.8]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.CombinedChannelDuplexHandler$DelegatingChannelHandlerContext.fireChannelRead(CombinedChannelDuplexHandler.java:436) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:346) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:318) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.CombinedChannelDuplexHandler.channelRead(CombinedChannelDuplexHandler.java:251) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:442) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.ssl.SslHandler.unwrap(SslHandler.java:1519) [netty-handler-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.ssl.SslHandler.decodeJdkCompatible(SslHandler.java:1377) [netty-handler-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.ssl.SslHandler.decode(SslHandler.java:1428) [netty-handler-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.decodeRemovalReentryProtection(ByteToMessageDecoder.java:530) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.callDecode(ByteToMessageDecoder.java:469) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:290) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1357) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:440) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:868) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:166) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:796) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:732) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:658) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:998) [netty-common-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) [netty-common-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) [netty-common-4.1.123.Final.jar:4.1.123.Final]
+		at java.base/java.lang.Thread.run(Thread.java:842) [?:?]
+[19 Nov 2025 00:29:28,922 INFO  Transaction -StartBot.java]- ::::::::::::::::::::::::::::::::::New Order execution Started:::::::::::::::::::::::::::::::::::
+[19 Nov 2025 00:29:28,922 INFO  Transaction -StartBot.java]- Details of Current Order:- 
+ EntryPrice->93014.0, 
+ Size->-2, 
+ CurrentTpPrice->0.0, 
+ CurrentAvgPrice->0.0:::::
+[19 Nov 2025 00:29:28,928 INFO  Transaction -StartBot.java]- ::::::::::::::::::::::::::::::::::New Order execution Ended:::::::::::::::::::::::::::::::::::
+[19 Nov 2025 00:29:29,163 INFO  Transaction -CheckAndOrderService.java]- Cancelled All Previous Orders for EntryPrice->93014.00000000, Size->-2:::::
+[19 Nov 2025 00:29:29,624 ERROR Operators -Loggers.java]- Operator called default onErrorDropped
+reactor.core.Exceptions$ErrorCallbackNotImplemented: org.springframework.web.reactive.function.client.WebClientResponseException$Unauthorized: 401 Unauthorized from POST https://api.india.delta.exchange/v2/products/27/orders/leverage
+Caused by: org.springframework.web.reactive.function.client.WebClientResponseException$Unauthorized: 401 Unauthorized from POST https://api.india.delta.exchange/v2/products/27/orders/leverage
+	at org.springframework.web.reactive.function.client.WebClientResponseException.create(WebClientResponseException.java:322) ~[spring-webflux-6.2.9.jar:6.2.9]
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ? 401 UNAUTHORIZED from POST https://api.india.delta.exchange/v2/products/27/orders/leverage [DefaultWebClient]
+Original Stack Trace:
+		at org.springframework.web.reactive.function.client.WebClientResponseException.create(WebClientResponseException.java:322) ~[spring-webflux-6.2.9.jar:6.2.9]
+		at org.springframework.web.reactive.function.client.DefaultClientResponse.lambda$createException$1(DefaultClientResponse.java:214) ~[spring-webflux-6.2.9.jar:6.2.9]
+		at reactor.core.publisher.FluxMap$MapSubscriber.onNext(FluxMap.java:106) ~[reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxOnErrorReturn$ReturnSubscriber.onNext(FluxOnErrorReturn.java:162) ~[reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxDefaultIfEmpty$DefaultIfEmptySubscriber.onNext(FluxDefaultIfEmpty.java:122) ~[reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.onNext(FluxMapFuseable.java:129) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxContextWrite$ContextWriteSubscriber.onNext(FluxContextWrite.java:107) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxMapFuseable$MapFuseableConditionalSubscriber.onNext(FluxMapFuseable.java:299) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxFilterFuseable$FilterFuseableConditionalSubscriber.onNext(FluxFilterFuseable.java:337) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.Operators$BaseFluxToMonoOperator.completePossiblyEmpty(Operators.java:2096) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.MonoCollect$CollectSubscriber.onComplete(MonoCollect.java:145) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxMap$MapSubscriber.onComplete(FluxMap.java:144) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxPeek$PeekSubscriber.onComplete(FluxPeek.java:260) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxMap$MapSubscriber.onComplete(FluxMap.java:144) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.netty.channel.FluxReceive.onInboundComplete(FluxReceive.java:413) [reactor-netty-core-1.2.8.jar:1.2.8]
+		at reactor.netty.channel.ChannelOperations.onInboundComplete(ChannelOperations.java:455) [reactor-netty-core-1.2.8.jar:1.2.8]
+		at reactor.netty.channel.ChannelOperations.terminate(ChannelOperations.java:509) [reactor-netty-core-1.2.8.jar:1.2.8]
+		at reactor.netty.http.client.HttpClientOperations.onInboundNext(HttpClientOperations.java:821) [reactor-netty-http-1.2.8.jar:1.2.8]
+		at reactor.netty.channel.ChannelOperationsHandler.channelRead(ChannelOperationsHandler.java:115) [reactor-netty-core-1.2.8.jar:1.2.8]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.CombinedChannelDuplexHandler$DelegatingChannelHandlerContext.fireChannelRead(CombinedChannelDuplexHandler.java:436) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:346) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:318) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.CombinedChannelDuplexHandler.channelRead(CombinedChannelDuplexHandler.java:251) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:442) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.ssl.SslHandler.unwrap(SslHandler.java:1519) [netty-handler-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.ssl.SslHandler.decodeJdkCompatible(SslHandler.java:1377) [netty-handler-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.ssl.SslHandler.decode(SslHandler.java:1428) [netty-handler-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.decodeRemovalReentryProtection(ByteToMessageDecoder.java:530) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.callDecode(ByteToMessageDecoder.java:469) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:290) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1357) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:440) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:868) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:166) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:796) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:732) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:658) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:998) [netty-common-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) [netty-common-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) [netty-common-4.1.123.Final.jar:4.1.123.Final]
+		at java.base/java.lang.Thread.run(Thread.java:842) [?:?]
+[19 Nov 2025 00:29:33,940 INFO  Transaction -StartBot.java]- ::::::::::::::::::::::::::::::::::New Order execution Started:::::::::::::::::::::::::::::::::::
+[19 Nov 2025 00:29:33,941 INFO  Transaction -StartBot.java]- Details of Current Order:- 
+ EntryPrice->93014.0, 
+ Size->-2, 
+ CurrentTpPrice->0.0, 
+ CurrentAvgPrice->0.0:::::
+[19 Nov 2025 00:29:33,953 INFO  Transaction -StartBot.java]- ::::::::::::::::::::::::::::::::::New Order execution Ended:::::::::::::::::::::::::::::::::::
+[19 Nov 2025 00:29:34,130 INFO  Transaction -CheckAndOrderService.java]- Cancelled All Previous Orders for EntryPrice->93014.00000000, Size->-2:::::
+[19 Nov 2025 00:29:34,350 ERROR Operators -Loggers.java]- Operator called default onErrorDropped
+reactor.core.Exceptions$ErrorCallbackNotImplemented: org.springframework.web.reactive.function.client.WebClientResponseException$Unauthorized: 401 Unauthorized from POST https://api.india.delta.exchange/v2/products/27/orders/leverage
+Caused by: org.springframework.web.reactive.function.client.WebClientResponseException$Unauthorized: 401 Unauthorized from POST https://api.india.delta.exchange/v2/products/27/orders/leverage
+	at org.springframework.web.reactive.function.client.WebClientResponseException.create(WebClientResponseException.java:322) ~[spring-webflux-6.2.9.jar:6.2.9]
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ? 401 UNAUTHORIZED from POST https://api.india.delta.exchange/v2/products/27/orders/leverage [DefaultWebClient]
+Original Stack Trace:
+		at org.springframework.web.reactive.function.client.WebClientResponseException.create(WebClientResponseException.java:322) ~[spring-webflux-6.2.9.jar:6.2.9]
+		at org.springframework.web.reactive.function.client.DefaultClientResponse.lambda$createException$1(DefaultClientResponse.java:214) ~[spring-webflux-6.2.9.jar:6.2.9]
+		at reactor.core.publisher.FluxMap$MapSubscriber.onNext(FluxMap.java:106) ~[reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxOnErrorReturn$ReturnSubscriber.onNext(FluxOnErrorReturn.java:162) ~[reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxDefaultIfEmpty$DefaultIfEmptySubscriber.onNext(FluxDefaultIfEmpty.java:122) ~[reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.onNext(FluxMapFuseable.java:129) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxContextWrite$ContextWriteSubscriber.onNext(FluxContextWrite.java:107) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxMapFuseable$MapFuseableConditionalSubscriber.onNext(FluxMapFuseable.java:299) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxFilterFuseable$FilterFuseableConditionalSubscriber.onNext(FluxFilterFuseable.java:337) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.Operators$BaseFluxToMonoOperator.completePossiblyEmpty(Operators.java:2096) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.MonoCollect$CollectSubscriber.onComplete(MonoCollect.java:145) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxMap$MapSubscriber.onComplete(FluxMap.java:144) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxPeek$PeekSubscriber.onComplete(FluxPeek.java:260) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxMap$MapSubscriber.onComplete(FluxMap.java:144) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.netty.channel.FluxReceive.onInboundComplete(FluxReceive.java:413) [reactor-netty-core-1.2.8.jar:1.2.8]
+		at reactor.netty.channel.ChannelOperations.onInboundComplete(ChannelOperations.java:455) [reactor-netty-core-1.2.8.jar:1.2.8]
+		at reactor.netty.channel.ChannelOperations.terminate(ChannelOperations.java:509) [reactor-netty-core-1.2.8.jar:1.2.8]
+		at reactor.netty.http.client.HttpClientOperations.onInboundNext(HttpClientOperations.java:821) [reactor-netty-http-1.2.8.jar:1.2.8]
+		at reactor.netty.channel.ChannelOperationsHandler.channelRead(ChannelOperationsHandler.java:115) [reactor-netty-core-1.2.8.jar:1.2.8]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.CombinedChannelDuplexHandler$DelegatingChannelHandlerContext.fireChannelRead(CombinedChannelDuplexHandler.java:436) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:346) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:318) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.CombinedChannelDuplexHandler.channelRead(CombinedChannelDuplexHandler.java:251) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:442) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.ssl.SslHandler.unwrap(SslHandler.java:1519) [netty-handler-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.ssl.SslHandler.decodeJdkCompatible(SslHandler.java:1377) [netty-handler-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.ssl.SslHandler.decode(SslHandler.java:1428) [netty-handler-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.decodeRemovalReentryProtection(ByteToMessageDecoder.java:530) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.callDecode(ByteToMessageDecoder.java:469) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:290) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1357) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:440) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:868) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:166) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:796) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:732) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:658) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:998) [netty-common-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) [netty-common-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) [netty-common-4.1.123.Final.jar:4.1.123.Final]
+		at java.base/java.lang.Thread.run(Thread.java:842) [?:?]
+[19 Nov 2025 00:31:29,815 INFO  Transaction -StartBot.java]- ::::::::::::::::::::::::::::::::::New Order execution Started:::::::::::::::::::::::::::::::::::
+[19 Nov 2025 00:31:29,816 INFO  Transaction -StartBot.java]- Details of Current Order:- 
+ EntryPrice->93014.0, 
+ Size->-2, 
+ CurrentTpPrice->0.0, 
+ CurrentAvgPrice->0.0:::::
+[19 Nov 2025 00:31:29,834 INFO  Transaction -StartBot.java]- ::::::::::::::::::::::::::::::::::New Order execution Ended:::::::::::::::::::::::::::::::::::
+[19 Nov 2025 00:31:30,053 INFO  Transaction -CheckAndOrderService.java]- Cancelled All Previous Orders for EntryPrice->93014.00000000, Size->-2:::::
+[19 Nov 2025 00:31:30,593 ERROR Operators -Loggers.java]- Operator called default onErrorDropped
+reactor.core.Exceptions$ErrorCallbackNotImplemented: org.springframework.web.reactive.function.client.WebClientResponseException$InternalServerError: 500 Internal Server Error from POST https://api.india.delta.exchange/v2/products/27/orders/leverage
+Caused by: org.springframework.web.reactive.function.client.WebClientResponseException$InternalServerError: 500 Internal Server Error from POST https://api.india.delta.exchange/v2/products/27/orders/leverage
 	at org.springframework.web.reactive.function.client.WebClientResponseException.create(WebClientResponseException.java:332) ~[spring-webflux-6.2.9.jar:6.2.9]
 	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
 Error has been observed at the following site(s):
-	*__checkpoint ? 500 INTERNAL_SERVER_ERROR from DELETE https://api.india.delta.exchange/v2/orders/all [DefaultWebClient]
+	*__checkpoint ? 500 INTERNAL_SERVER_ERROR from POST https://api.india.delta.exchange/v2/products/27/orders/leverage [DefaultWebClient]
 Original Stack Trace:
 		at org.springframework.web.reactive.function.client.WebClientResponseException.create(WebClientResponseException.java:332) ~[spring-webflux-6.2.9.jar:6.2.9]
 		at org.springframework.web.reactive.function.client.DefaultClientResponse.lambda$createException$1(DefaultClientResponse.java:214) ~[spring-webflux-6.2.9.jar:6.2.9]
@@ -64,15 +467,23 @@ Original Stack Trace:
 		at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) [netty-common-4.1.123.Final.jar:4.1.123.Final]
 		at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) [netty-common-4.1.123.Final.jar:4.1.123.Final]
 		at java.base/java.lang.Thread.run(Thread.java:842) [?:?]
-[17 Nov 2025 02:32:47,147 ERROR Operators -Loggers.java]- Operator called default onErrorDropped
-reactor.core.Exceptions$ErrorCallbackNotImplemented: org.springframework.web.reactive.function.client.WebClientResponseException$NotFound: 404 Not Found from POST https://api.india.delta.exchange/products/27/orders/leverage
-Caused by: org.springframework.web.reactive.function.client.WebClientResponseException$NotFound: 404 Not Found from POST https://api.india.delta.exchange/products/27/orders/leverage
-	at org.springframework.web.reactive.function.client.WebClientResponseException.create(WebClientResponseException.java:324) ~[spring-webflux-6.2.9.jar:6.2.9]
+[19 Nov 2025 00:31:33,741 INFO  Transaction -StartBot.java]- ::::::::::::::::::::::::::::::::::New Order execution Started:::::::::::::::::::::::::::::::::::
+[19 Nov 2025 00:31:33,741 INFO  Transaction -StartBot.java]- Details of Current Order:- 
+ EntryPrice->93014.0, 
+ Size->-2, 
+ CurrentTpPrice->0.0, 
+ CurrentAvgPrice->0.0:::::
+[19 Nov 2025 00:31:33,752 INFO  Transaction -StartBot.java]- ::::::::::::::::::::::::::::::::::New Order execution Ended:::::::::::::::::::::::::::::::::::
+[19 Nov 2025 00:31:33,920 INFO  Transaction -CheckAndOrderService.java]- Cancelled All Previous Orders for EntryPrice->93014.00000000, Size->-2:::::
+[19 Nov 2025 00:31:34,465 ERROR Operators -Loggers.java]- Operator called default onErrorDropped
+reactor.core.Exceptions$ErrorCallbackNotImplemented: org.springframework.web.reactive.function.client.WebClientResponseException$InternalServerError: 500 Internal Server Error from POST https://api.india.delta.exchange/v2/products/27/orders/leverage
+Caused by: org.springframework.web.reactive.function.client.WebClientResponseException$InternalServerError: 500 Internal Server Error from POST https://api.india.delta.exchange/v2/products/27/orders/leverage
+	at org.springframework.web.reactive.function.client.WebClientResponseException.create(WebClientResponseException.java:332) ~[spring-webflux-6.2.9.jar:6.2.9]
 	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
 Error has been observed at the following site(s):
-	*__checkpoint ? 404 NOT_FOUND from POST https://api.india.delta.exchange/products/27/orders/leverage [DefaultWebClient]
+	*__checkpoint ? 500 INTERNAL_SERVER_ERROR from POST https://api.india.delta.exchange/v2/products/27/orders/leverage [DefaultWebClient]
 Original Stack Trace:
-		at org.springframework.web.reactive.function.client.WebClientResponseException.create(WebClientResponseException.java:324) ~[spring-webflux-6.2.9.jar:6.2.9]
+		at org.springframework.web.reactive.function.client.WebClientResponseException.create(WebClientResponseException.java:332) ~[spring-webflux-6.2.9.jar:6.2.9]
 		at org.springframework.web.reactive.function.client.DefaultClientResponse.lambda$createException$1(DefaultClientResponse.java:214) ~[spring-webflux-6.2.9.jar:6.2.9]
 		at reactor.core.publisher.FluxMap$MapSubscriber.onNext(FluxMap.java:106) ~[reactor-core-3.7.8.jar:3.7.8]
 		at reactor.core.publisher.FluxOnErrorReturn$ReturnSubscriber.onNext(FluxOnErrorReturn.java:162) ~[reactor-core-3.7.8.jar:3.7.8]
@@ -123,3 +534,524 @@ Original Stack Trace:
 		at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) [netty-common-4.1.123.Final.jar:4.1.123.Final]
 		at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) [netty-common-4.1.123.Final.jar:4.1.123.Final]
 		at java.base/java.lang.Thread.run(Thread.java:842) [?:?]
+[19 Nov 2025 00:31:38,722 INFO  Transaction -StartBot.java]- ::::::::::::::::::::::::::::::::::New Order execution Started:::::::::::::::::::::::::::::::::::
+[19 Nov 2025 00:31:38,722 INFO  Transaction -StartBot.java]- Details of Current Order:- 
+ EntryPrice->93014.0, 
+ Size->-2, 
+ CurrentTpPrice->0.0, 
+ CurrentAvgPrice->0.0:::::
+[19 Nov 2025 00:31:38,726 INFO  Transaction -StartBot.java]- ::::::::::::::::::::::::::::::::::New Order execution Ended:::::::::::::::::::::::::::::::::::
+[19 Nov 2025 00:31:38,970 INFO  Transaction -CheckAndOrderService.java]- Cancelled All Previous Orders for EntryPrice->93014.00000000, Size->-2:::::
+[19 Nov 2025 00:31:39,174 ERROR Operators -Loggers.java]- Operator called default onErrorDropped
+reactor.core.Exceptions$ErrorCallbackNotImplemented: org.springframework.web.reactive.function.client.WebClientResponseException$InternalServerError: 500 Internal Server Error from POST https://api.india.delta.exchange/v2/products/27/orders/leverage
+Caused by: org.springframework.web.reactive.function.client.WebClientResponseException$InternalServerError: 500 Internal Server Error from POST https://api.india.delta.exchange/v2/products/27/orders/leverage
+	at org.springframework.web.reactive.function.client.WebClientResponseException.create(WebClientResponseException.java:332) ~[spring-webflux-6.2.9.jar:6.2.9]
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ? 500 INTERNAL_SERVER_ERROR from POST https://api.india.delta.exchange/v2/products/27/orders/leverage [DefaultWebClient]
+Original Stack Trace:
+		at org.springframework.web.reactive.function.client.WebClientResponseException.create(WebClientResponseException.java:332) ~[spring-webflux-6.2.9.jar:6.2.9]
+		at org.springframework.web.reactive.function.client.DefaultClientResponse.lambda$createException$1(DefaultClientResponse.java:214) ~[spring-webflux-6.2.9.jar:6.2.9]
+		at reactor.core.publisher.FluxMap$MapSubscriber.onNext(FluxMap.java:106) ~[reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxOnErrorReturn$ReturnSubscriber.onNext(FluxOnErrorReturn.java:162) ~[reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxDefaultIfEmpty$DefaultIfEmptySubscriber.onNext(FluxDefaultIfEmpty.java:122) ~[reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.onNext(FluxMapFuseable.java:129) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxContextWrite$ContextWriteSubscriber.onNext(FluxContextWrite.java:107) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxMapFuseable$MapFuseableConditionalSubscriber.onNext(FluxMapFuseable.java:299) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxFilterFuseable$FilterFuseableConditionalSubscriber.onNext(FluxFilterFuseable.java:337) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.Operators$BaseFluxToMonoOperator.completePossiblyEmpty(Operators.java:2096) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.MonoCollect$CollectSubscriber.onComplete(MonoCollect.java:145) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxMap$MapSubscriber.onComplete(FluxMap.java:144) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxPeek$PeekSubscriber.onComplete(FluxPeek.java:260) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxMap$MapSubscriber.onComplete(FluxMap.java:144) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.netty.channel.FluxReceive.onInboundComplete(FluxReceive.java:413) [reactor-netty-core-1.2.8.jar:1.2.8]
+		at reactor.netty.channel.ChannelOperations.onInboundComplete(ChannelOperations.java:455) [reactor-netty-core-1.2.8.jar:1.2.8]
+		at reactor.netty.channel.ChannelOperations.terminate(ChannelOperations.java:509) [reactor-netty-core-1.2.8.jar:1.2.8]
+		at reactor.netty.http.client.HttpClientOperations.onInboundNext(HttpClientOperations.java:821) [reactor-netty-http-1.2.8.jar:1.2.8]
+		at reactor.netty.channel.ChannelOperationsHandler.channelRead(ChannelOperationsHandler.java:115) [reactor-netty-core-1.2.8.jar:1.2.8]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.CombinedChannelDuplexHandler$DelegatingChannelHandlerContext.fireChannelRead(CombinedChannelDuplexHandler.java:436) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:346) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:318) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.CombinedChannelDuplexHandler.channelRead(CombinedChannelDuplexHandler.java:251) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:442) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.ssl.SslHandler.unwrap(SslHandler.java:1519) [netty-handler-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.ssl.SslHandler.decodeJdkCompatible(SslHandler.java:1377) [netty-handler-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.ssl.SslHandler.decode(SslHandler.java:1428) [netty-handler-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.decodeRemovalReentryProtection(ByteToMessageDecoder.java:530) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.callDecode(ByteToMessageDecoder.java:469) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:290) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1357) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:440) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:868) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:166) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:796) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:732) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:658) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:998) [netty-common-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) [netty-common-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) [netty-common-4.1.123.Final.jar:4.1.123.Final]
+		at java.base/java.lang.Thread.run(Thread.java:842) [?:?]
+[19 Nov 2025 00:33:00,967 INFO  Transaction -StartBot.java]- ::::::::::::::::::::::::::::::::::New Order execution Started:::::::::::::::::::::::::::::::::::
+[19 Nov 2025 00:33:00,967 INFO  Transaction -StartBot.java]- Details of Current Order:- 
+ EntryPrice->93014.0, 
+ Size->-2, 
+ CurrentTpPrice->0.0, 
+ CurrentAvgPrice->0.0:::::
+[19 Nov 2025 00:33:00,980 INFO  Transaction -StartBot.java]- ::::::::::::::::::::::::::::::::::New Order execution Ended:::::::::::::::::::::::::::::::::::
+[19 Nov 2025 00:33:01,303 INFO  Transaction -CheckAndOrderService.java]- Cancelled All Previous Orders for EntryPrice->93014.00000000, Size->-2:::::
+[19 Nov 2025 00:33:01,659 ERROR Operators -Loggers.java]- Operator called default onErrorDropped
+reactor.core.Exceptions$ErrorCallbackNotImplemented: org.springframework.web.reactive.function.client.WebClientResponseException$Unauthorized: 401 Unauthorized from POST https://api.india.delta.exchange/v2/products/27/orders/leverage
+Caused by: org.springframework.web.reactive.function.client.WebClientResponseException$Unauthorized: 401 Unauthorized from POST https://api.india.delta.exchange/v2/products/27/orders/leverage
+	at org.springframework.web.reactive.function.client.WebClientResponseException.create(WebClientResponseException.java:322) ~[spring-webflux-6.2.9.jar:6.2.9]
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ? 401 UNAUTHORIZED from POST https://api.india.delta.exchange/v2/products/27/orders/leverage [DefaultWebClient]
+Original Stack Trace:
+		at org.springframework.web.reactive.function.client.WebClientResponseException.create(WebClientResponseException.java:322) ~[spring-webflux-6.2.9.jar:6.2.9]
+		at org.springframework.web.reactive.function.client.DefaultClientResponse.lambda$createException$1(DefaultClientResponse.java:214) ~[spring-webflux-6.2.9.jar:6.2.9]
+		at reactor.core.publisher.FluxMap$MapSubscriber.onNext(FluxMap.java:106) ~[reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxOnErrorReturn$ReturnSubscriber.onNext(FluxOnErrorReturn.java:162) ~[reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxDefaultIfEmpty$DefaultIfEmptySubscriber.onNext(FluxDefaultIfEmpty.java:122) ~[reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.onNext(FluxMapFuseable.java:129) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxContextWrite$ContextWriteSubscriber.onNext(FluxContextWrite.java:107) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxMapFuseable$MapFuseableConditionalSubscriber.onNext(FluxMapFuseable.java:299) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxFilterFuseable$FilterFuseableConditionalSubscriber.onNext(FluxFilterFuseable.java:337) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.Operators$BaseFluxToMonoOperator.completePossiblyEmpty(Operators.java:2096) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.MonoCollect$CollectSubscriber.onComplete(MonoCollect.java:145) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxMap$MapSubscriber.onComplete(FluxMap.java:144) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxPeek$PeekSubscriber.onComplete(FluxPeek.java:260) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxMap$MapSubscriber.onComplete(FluxMap.java:144) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.netty.channel.FluxReceive.onInboundComplete(FluxReceive.java:413) [reactor-netty-core-1.2.8.jar:1.2.8]
+		at reactor.netty.channel.ChannelOperations.onInboundComplete(ChannelOperations.java:455) [reactor-netty-core-1.2.8.jar:1.2.8]
+		at reactor.netty.channel.ChannelOperations.terminate(ChannelOperations.java:509) [reactor-netty-core-1.2.8.jar:1.2.8]
+		at reactor.netty.http.client.HttpClientOperations.onInboundNext(HttpClientOperations.java:821) [reactor-netty-http-1.2.8.jar:1.2.8]
+		at reactor.netty.channel.ChannelOperationsHandler.channelRead(ChannelOperationsHandler.java:115) [reactor-netty-core-1.2.8.jar:1.2.8]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.CombinedChannelDuplexHandler$DelegatingChannelHandlerContext.fireChannelRead(CombinedChannelDuplexHandler.java:436) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:346) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:318) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.CombinedChannelDuplexHandler.channelRead(CombinedChannelDuplexHandler.java:251) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:442) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.ssl.SslHandler.unwrap(SslHandler.java:1519) [netty-handler-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.ssl.SslHandler.decodeJdkCompatible(SslHandler.java:1377) [netty-handler-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.ssl.SslHandler.decode(SslHandler.java:1428) [netty-handler-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.decodeRemovalReentryProtection(ByteToMessageDecoder.java:530) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.callDecode(ByteToMessageDecoder.java:469) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:290) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1357) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:440) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:868) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:166) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:796) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:732) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:658) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:998) [netty-common-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) [netty-common-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) [netty-common-4.1.123.Final.jar:4.1.123.Final]
+		at java.base/java.lang.Thread.run(Thread.java:842) [?:?]
+[19 Nov 2025 00:33:04,859 INFO  Transaction -StartBot.java]- ::::::::::::::::::::::::::::::::::New Order execution Started:::::::::::::::::::::::::::::::::::
+[19 Nov 2025 00:33:04,859 INFO  Transaction -StartBot.java]- Details of Current Order:- 
+ EntryPrice->93014.0, 
+ Size->-2, 
+ CurrentTpPrice->0.0, 
+ CurrentAvgPrice->0.0:::::
+[19 Nov 2025 00:33:04,874 INFO  Transaction -StartBot.java]- ::::::::::::::::::::::::::::::::::New Order execution Ended:::::::::::::::::::::::::::::::::::
+[19 Nov 2025 00:33:05,092 INFO  Transaction -CheckAndOrderService.java]- Cancelled All Previous Orders for EntryPrice->93014.00000000, Size->-2:::::
+[19 Nov 2025 00:33:05,294 ERROR Operators -Loggers.java]- Operator called default onErrorDropped
+reactor.core.Exceptions$ErrorCallbackNotImplemented: org.springframework.web.reactive.function.client.WebClientResponseException$Unauthorized: 401 Unauthorized from POST https://api.india.delta.exchange/v2/products/27/orders/leverage
+Caused by: org.springframework.web.reactive.function.client.WebClientResponseException$Unauthorized: 401 Unauthorized from POST https://api.india.delta.exchange/v2/products/27/orders/leverage
+	at org.springframework.web.reactive.function.client.WebClientResponseException.create(WebClientResponseException.java:322) ~[spring-webflux-6.2.9.jar:6.2.9]
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ? 401 UNAUTHORIZED from POST https://api.india.delta.exchange/v2/products/27/orders/leverage [DefaultWebClient]
+Original Stack Trace:
+		at org.springframework.web.reactive.function.client.WebClientResponseException.create(WebClientResponseException.java:322) ~[spring-webflux-6.2.9.jar:6.2.9]
+		at org.springframework.web.reactive.function.client.DefaultClientResponse.lambda$createException$1(DefaultClientResponse.java:214) ~[spring-webflux-6.2.9.jar:6.2.9]
+		at reactor.core.publisher.FluxMap$MapSubscriber.onNext(FluxMap.java:106) ~[reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxOnErrorReturn$ReturnSubscriber.onNext(FluxOnErrorReturn.java:162) ~[reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxDefaultIfEmpty$DefaultIfEmptySubscriber.onNext(FluxDefaultIfEmpty.java:122) ~[reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.onNext(FluxMapFuseable.java:129) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxContextWrite$ContextWriteSubscriber.onNext(FluxContextWrite.java:107) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxMapFuseable$MapFuseableConditionalSubscriber.onNext(FluxMapFuseable.java:299) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxFilterFuseable$FilterFuseableConditionalSubscriber.onNext(FluxFilterFuseable.java:337) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.Operators$BaseFluxToMonoOperator.completePossiblyEmpty(Operators.java:2096) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.MonoCollect$CollectSubscriber.onComplete(MonoCollect.java:145) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxMap$MapSubscriber.onComplete(FluxMap.java:144) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxPeek$PeekSubscriber.onComplete(FluxPeek.java:260) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxMap$MapSubscriber.onComplete(FluxMap.java:144) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.netty.channel.FluxReceive.onInboundComplete(FluxReceive.java:413) [reactor-netty-core-1.2.8.jar:1.2.8]
+		at reactor.netty.channel.ChannelOperations.onInboundComplete(ChannelOperations.java:455) [reactor-netty-core-1.2.8.jar:1.2.8]
+		at reactor.netty.channel.ChannelOperations.terminate(ChannelOperations.java:509) [reactor-netty-core-1.2.8.jar:1.2.8]
+		at reactor.netty.http.client.HttpClientOperations.onInboundNext(HttpClientOperations.java:821) [reactor-netty-http-1.2.8.jar:1.2.8]
+		at reactor.netty.channel.ChannelOperationsHandler.channelRead(ChannelOperationsHandler.java:115) [reactor-netty-core-1.2.8.jar:1.2.8]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.CombinedChannelDuplexHandler$DelegatingChannelHandlerContext.fireChannelRead(CombinedChannelDuplexHandler.java:436) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:346) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:318) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.CombinedChannelDuplexHandler.channelRead(CombinedChannelDuplexHandler.java:251) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:442) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.ssl.SslHandler.unwrap(SslHandler.java:1519) [netty-handler-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.ssl.SslHandler.decodeJdkCompatible(SslHandler.java:1377) [netty-handler-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.ssl.SslHandler.decode(SslHandler.java:1428) [netty-handler-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.decodeRemovalReentryProtection(ByteToMessageDecoder.java:530) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.callDecode(ByteToMessageDecoder.java:469) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:290) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1357) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:440) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:868) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:166) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:796) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:732) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:658) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:998) [netty-common-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) [netty-common-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) [netty-common-4.1.123.Final.jar:4.1.123.Final]
+		at java.base/java.lang.Thread.run(Thread.java:842) [?:?]
+[19 Nov 2025 00:33:09,870 INFO  Transaction -StartBot.java]- ::::::::::::::::::::::::::::::::::New Order execution Started:::::::::::::::::::::::::::::::::::
+[19 Nov 2025 00:33:09,870 INFO  Transaction -StartBot.java]- Details of Current Order:- 
+ EntryPrice->93014.0, 
+ Size->-2, 
+ CurrentTpPrice->0.0, 
+ CurrentAvgPrice->0.0:::::
+[19 Nov 2025 00:33:09,884 INFO  Transaction -StartBot.java]- ::::::::::::::::::::::::::::::::::New Order execution Ended:::::::::::::::::::::::::::::::::::
+[19 Nov 2025 00:33:10,076 INFO  Transaction -CheckAndOrderService.java]- Cancelled All Previous Orders for EntryPrice->93014.00000000, Size->-2:::::
+[19 Nov 2025 00:33:10,259 ERROR Operators -Loggers.java]- Operator called default onErrorDropped
+reactor.core.Exceptions$ErrorCallbackNotImplemented: org.springframework.web.reactive.function.client.WebClientResponseException$Unauthorized: 401 Unauthorized from POST https://api.india.delta.exchange/v2/products/27/orders/leverage
+Caused by: org.springframework.web.reactive.function.client.WebClientResponseException$Unauthorized: 401 Unauthorized from POST https://api.india.delta.exchange/v2/products/27/orders/leverage
+	at org.springframework.web.reactive.function.client.WebClientResponseException.create(WebClientResponseException.java:322) ~[spring-webflux-6.2.9.jar:6.2.9]
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ? 401 UNAUTHORIZED from POST https://api.india.delta.exchange/v2/products/27/orders/leverage [DefaultWebClient]
+Original Stack Trace:
+		at org.springframework.web.reactive.function.client.WebClientResponseException.create(WebClientResponseException.java:322) ~[spring-webflux-6.2.9.jar:6.2.9]
+		at org.springframework.web.reactive.function.client.DefaultClientResponse.lambda$createException$1(DefaultClientResponse.java:214) ~[spring-webflux-6.2.9.jar:6.2.9]
+		at reactor.core.publisher.FluxMap$MapSubscriber.onNext(FluxMap.java:106) ~[reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxOnErrorReturn$ReturnSubscriber.onNext(FluxOnErrorReturn.java:162) ~[reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxDefaultIfEmpty$DefaultIfEmptySubscriber.onNext(FluxDefaultIfEmpty.java:122) ~[reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.onNext(FluxMapFuseable.java:129) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxContextWrite$ContextWriteSubscriber.onNext(FluxContextWrite.java:107) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxMapFuseable$MapFuseableConditionalSubscriber.onNext(FluxMapFuseable.java:299) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxFilterFuseable$FilterFuseableConditionalSubscriber.onNext(FluxFilterFuseable.java:337) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.Operators$BaseFluxToMonoOperator.completePossiblyEmpty(Operators.java:2096) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.MonoCollect$CollectSubscriber.onComplete(MonoCollect.java:145) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxMap$MapSubscriber.onComplete(FluxMap.java:144) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxPeek$PeekSubscriber.onComplete(FluxPeek.java:260) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxMap$MapSubscriber.onComplete(FluxMap.java:144) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.netty.channel.FluxReceive.onInboundComplete(FluxReceive.java:413) [reactor-netty-core-1.2.8.jar:1.2.8]
+		at reactor.netty.channel.ChannelOperations.onInboundComplete(ChannelOperations.java:455) [reactor-netty-core-1.2.8.jar:1.2.8]
+		at reactor.netty.channel.ChannelOperations.terminate(ChannelOperations.java:509) [reactor-netty-core-1.2.8.jar:1.2.8]
+		at reactor.netty.http.client.HttpClientOperations.onInboundNext(HttpClientOperations.java:821) [reactor-netty-http-1.2.8.jar:1.2.8]
+		at reactor.netty.channel.ChannelOperationsHandler.channelRead(ChannelOperationsHandler.java:115) [reactor-netty-core-1.2.8.jar:1.2.8]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.CombinedChannelDuplexHandler$DelegatingChannelHandlerContext.fireChannelRead(CombinedChannelDuplexHandler.java:436) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:346) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:318) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.CombinedChannelDuplexHandler.channelRead(CombinedChannelDuplexHandler.java:251) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:442) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.ssl.SslHandler.unwrap(SslHandler.java:1519) [netty-handler-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.ssl.SslHandler.decodeJdkCompatible(SslHandler.java:1377) [netty-handler-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.ssl.SslHandler.decode(SslHandler.java:1428) [netty-handler-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.decodeRemovalReentryProtection(ByteToMessageDecoder.java:530) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.callDecode(ByteToMessageDecoder.java:469) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:290) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1357) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:440) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:868) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:166) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:796) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:732) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:658) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:998) [netty-common-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) [netty-common-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) [netty-common-4.1.123.Final.jar:4.1.123.Final]
+		at java.base/java.lang.Thread.run(Thread.java:842) [?:?]
+[19 Nov 2025 00:35:56,296 INFO  Transaction -StartBot.java]- ::::::::::::::::::::::::::::::::::New Order execution Started:::::::::::::::::::::::::::::::::::
+[19 Nov 2025 00:35:56,296 INFO  Transaction -StartBot.java]- Details of Current Order:- 
+ EntryPrice->93014.0, 
+ Size->-2, 
+ CurrentTpPrice->0.0, 
+ CurrentAvgPrice->0.0:::::
+[19 Nov 2025 00:35:56,354 INFO  Transaction -StartBot.java]- ::::::::::::::::::::::::::::::::::New Order execution Ended:::::::::::::::::::::::::::::::::::
+[19 Nov 2025 00:35:56,581 INFO  Transaction -CheckAndOrderService.java]- Cancelled All Previous Orders for EntryPrice->93014.00000000, Size->-2:::::
+[19 Nov 2025 00:35:57,057 ERROR Operators -Loggers.java]- Operator called default onErrorDropped
+reactor.core.Exceptions$ErrorCallbackNotImplemented: org.springframework.web.reactive.function.client.WebClientResponseException$Unauthorized: 401 Unauthorized from POST https://api.india.delta.exchange/v2/products/27/orders/leverage
+Caused by: org.springframework.web.reactive.function.client.WebClientResponseException$Unauthorized: 401 Unauthorized from POST https://api.india.delta.exchange/v2/products/27/orders/leverage
+	at org.springframework.web.reactive.function.client.WebClientResponseException.create(WebClientResponseException.java:322) ~[spring-webflux-6.2.9.jar:6.2.9]
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ? 401 UNAUTHORIZED from POST https://api.india.delta.exchange/v2/products/27/orders/leverage [DefaultWebClient]
+Original Stack Trace:
+		at org.springframework.web.reactive.function.client.WebClientResponseException.create(WebClientResponseException.java:322) ~[spring-webflux-6.2.9.jar:6.2.9]
+		at org.springframework.web.reactive.function.client.DefaultClientResponse.lambda$createException$1(DefaultClientResponse.java:214) ~[spring-webflux-6.2.9.jar:6.2.9]
+		at reactor.core.publisher.FluxMap$MapSubscriber.onNext(FluxMap.java:106) ~[reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxOnErrorReturn$ReturnSubscriber.onNext(FluxOnErrorReturn.java:162) ~[reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxDefaultIfEmpty$DefaultIfEmptySubscriber.onNext(FluxDefaultIfEmpty.java:122) ~[reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.onNext(FluxMapFuseable.java:129) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxContextWrite$ContextWriteSubscriber.onNext(FluxContextWrite.java:107) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxMapFuseable$MapFuseableConditionalSubscriber.onNext(FluxMapFuseable.java:299) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxFilterFuseable$FilterFuseableConditionalSubscriber.onNext(FluxFilterFuseable.java:337) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.Operators$BaseFluxToMonoOperator.completePossiblyEmpty(Operators.java:2096) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.MonoCollect$CollectSubscriber.onComplete(MonoCollect.java:145) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxMap$MapSubscriber.onComplete(FluxMap.java:144) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxPeek$PeekSubscriber.onComplete(FluxPeek.java:260) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxMap$MapSubscriber.onComplete(FluxMap.java:144) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.netty.channel.FluxReceive.onInboundComplete(FluxReceive.java:413) [reactor-netty-core-1.2.8.jar:1.2.8]
+		at reactor.netty.channel.ChannelOperations.onInboundComplete(ChannelOperations.java:455) [reactor-netty-core-1.2.8.jar:1.2.8]
+		at reactor.netty.channel.ChannelOperations.terminate(ChannelOperations.java:509) [reactor-netty-core-1.2.8.jar:1.2.8]
+		at reactor.netty.http.client.HttpClientOperations.onInboundNext(HttpClientOperations.java:821) [reactor-netty-http-1.2.8.jar:1.2.8]
+		at reactor.netty.channel.ChannelOperationsHandler.channelRead(ChannelOperationsHandler.java:115) [reactor-netty-core-1.2.8.jar:1.2.8]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.CombinedChannelDuplexHandler$DelegatingChannelHandlerContext.fireChannelRead(CombinedChannelDuplexHandler.java:436) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:346) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:318) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.CombinedChannelDuplexHandler.channelRead(CombinedChannelDuplexHandler.java:251) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:442) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.ssl.SslHandler.unwrap(SslHandler.java:1519) [netty-handler-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.ssl.SslHandler.decodeJdkCompatible(SslHandler.java:1377) [netty-handler-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.ssl.SslHandler.decode(SslHandler.java:1428) [netty-handler-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.decodeRemovalReentryProtection(ByteToMessageDecoder.java:530) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.callDecode(ByteToMessageDecoder.java:469) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:290) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1357) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:440) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:868) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:166) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:796) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:732) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:658) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:998) [netty-common-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) [netty-common-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) [netty-common-4.1.123.Final.jar:4.1.123.Final]
+		at java.base/java.lang.Thread.run(Thread.java:842) [?:?]
+[19 Nov 2025 00:35:59,843 INFO  Transaction -StartBot.java]- ::::::::::::::::::::::::::::::::::New Order execution Started:::::::::::::::::::::::::::::::::::
+[19 Nov 2025 00:35:59,843 INFO  Transaction -StartBot.java]- Details of Current Order:- 
+ EntryPrice->93014.0, 
+ Size->-2, 
+ CurrentTpPrice->0.0, 
+ CurrentAvgPrice->0.0:::::
+[19 Nov 2025 00:35:59,851 INFO  Transaction -StartBot.java]- ::::::::::::::::::::::::::::::::::New Order execution Ended:::::::::::::::::::::::::::::::::::
+[19 Nov 2025 00:36:00,031 INFO  Transaction -CheckAndOrderService.java]- Cancelled All Previous Orders for EntryPrice->93014.00000000, Size->-2:::::
+[19 Nov 2025 00:36:00,485 ERROR Operators -Loggers.java]- Operator called default onErrorDropped
+reactor.core.Exceptions$ErrorCallbackNotImplemented: org.springframework.web.reactive.function.client.WebClientResponseException$Unauthorized: 401 Unauthorized from POST https://api.india.delta.exchange/v2/products/27/orders/leverage
+Caused by: org.springframework.web.reactive.function.client.WebClientResponseException$Unauthorized: 401 Unauthorized from POST https://api.india.delta.exchange/v2/products/27/orders/leverage
+	at org.springframework.web.reactive.function.client.WebClientResponseException.create(WebClientResponseException.java:322) ~[spring-webflux-6.2.9.jar:6.2.9]
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ? 401 UNAUTHORIZED from POST https://api.india.delta.exchange/v2/products/27/orders/leverage [DefaultWebClient]
+Original Stack Trace:
+		at org.springframework.web.reactive.function.client.WebClientResponseException.create(WebClientResponseException.java:322) ~[spring-webflux-6.2.9.jar:6.2.9]
+		at org.springframework.web.reactive.function.client.DefaultClientResponse.lambda$createException$1(DefaultClientResponse.java:214) ~[spring-webflux-6.2.9.jar:6.2.9]
+		at reactor.core.publisher.FluxMap$MapSubscriber.onNext(FluxMap.java:106) ~[reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxOnErrorReturn$ReturnSubscriber.onNext(FluxOnErrorReturn.java:162) ~[reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxDefaultIfEmpty$DefaultIfEmptySubscriber.onNext(FluxDefaultIfEmpty.java:122) ~[reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.onNext(FluxMapFuseable.java:129) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxContextWrite$ContextWriteSubscriber.onNext(FluxContextWrite.java:107) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxMapFuseable$MapFuseableConditionalSubscriber.onNext(FluxMapFuseable.java:299) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxFilterFuseable$FilterFuseableConditionalSubscriber.onNext(FluxFilterFuseable.java:337) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.Operators$BaseFluxToMonoOperator.completePossiblyEmpty(Operators.java:2096) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.MonoCollect$CollectSubscriber.onComplete(MonoCollect.java:145) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxMap$MapSubscriber.onComplete(FluxMap.java:144) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxPeek$PeekSubscriber.onComplete(FluxPeek.java:260) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.core.publisher.FluxMap$MapSubscriber.onComplete(FluxMap.java:144) [reactor-core-3.7.8.jar:3.7.8]
+		at reactor.netty.channel.FluxReceive.onInboundComplete(FluxReceive.java:413) [reactor-netty-core-1.2.8.jar:1.2.8]
+		at reactor.netty.channel.ChannelOperations.onInboundComplete(ChannelOperations.java:455) [reactor-netty-core-1.2.8.jar:1.2.8]
+		at reactor.netty.channel.ChannelOperations.terminate(ChannelOperations.java:509) [reactor-netty-core-1.2.8.jar:1.2.8]
+		at reactor.netty.http.client.HttpClientOperations.onInboundNext(HttpClientOperations.java:821) [reactor-netty-http-1.2.8.jar:1.2.8]
+		at reactor.netty.channel.ChannelOperationsHandler.channelRead(ChannelOperationsHandler.java:115) [reactor-netty-core-1.2.8.jar:1.2.8]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.CombinedChannelDuplexHandler$DelegatingChannelHandlerContext.fireChannelRead(CombinedChannelDuplexHandler.java:436) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:346) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:318) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.CombinedChannelDuplexHandler.channelRead(CombinedChannelDuplexHandler.java:251) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:442) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.ssl.SslHandler.unwrap(SslHandler.java:1519) [netty-handler-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.ssl.SslHandler.decodeJdkCompatible(SslHandler.java:1377) [netty-handler-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.ssl.SslHandler.decode(SslHandler.java:1428) [netty-handler-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.decodeRemovalReentryProtection(ByteToMessageDecoder.java:530) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.callDecode(ByteToMessageDecoder.java:469) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:290) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1357) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:440) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:868) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:166) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:796) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:732) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:658) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:998) [netty-common-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) [netty-common-4.1.123.Final.jar:4.1.123.Final]
+		at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) [netty-common-4.1.123.Final.jar:4.1.123.Final]
+		at java.base/java.lang.Thread.run(Thread.java:842) [?:?]
+[19 Nov 2025 00:37:13,739 INFO  Transaction -StartBot.java]- ::::::::::::::::::::::::::::::::::New Order execution Started:::::::::::::::::::::::::::::::::::
+[19 Nov 2025 00:37:13,739 INFO  Transaction -StartBot.java]- Details of Current Order:- 
+ EntryPrice->93014.0, 
+ Size->-2, 
+ CurrentTpPrice->0.0, 
+ CurrentAvgPrice->0.0:::::
+[19 Nov 2025 00:37:13,763 INFO  Transaction -StartBot.java]- ::::::::::::::::::::::::::::::::::New Order execution Ended:::::::::::::::::::::::::::::::::::
+[19 Nov 2025 00:37:14,001 INFO  Transaction -CheckAndOrderService.java]- Cancelled All Previous Orders for EntryPrice->93014.00000000, Size->-2:::::
+[19 Nov 2025 00:37:14,190 INFO  Transaction -CheckAndOrderService.java]- Leverage Set Successfully Orders for EntryPrice->93014.00000000, Size->-2, Leverage->10:::::
+[19 Nov 2025 00:45:45,637 INFO  Transaction -StartBot.java]- ::::::::::::::::::::::::::::::::::New Order execution Started:::::::::::::::::::::::::::::::::::
+[19 Nov 2025 00:45:45,637 INFO  Transaction -StartBot.java]- Details of Current Order:- 
+ EntryPrice->93014.0, 
+ Size->-2, 
+ CurrentTpPrice->0.0, 
+ CurrentAvgPrice->0.0:::::
+[19 Nov 2025 00:45:45,658 INFO  Transaction -StartBot.java]- ::::::::::::::::::::::::::::::::::New Order execution Ended:::::::::::::::::::::::::::::::::::
+[19 Nov 2025 00:45:45,907 INFO  Transaction -CheckAndOrderService.java]- Cancelled All Previous Orders for EntryPrice->93014.00000000, Size->-2:::::
+[19 Nov 2025 00:45:46,451 INFO  Transaction -CheckAndOrderService.java]- Leverage Set Successfully Orders for EntryPrice->93014.00000000, Size->-2, Leverage->10:::::
+[19 Nov 2025 00:47:39,123 INFO  Transaction -StartBot.java]- ::::::::::::::::::::::::::::::::::New Order execution Started:::::::::::::::::::::::::::::::::::
+[19 Nov 2025 00:47:39,123 INFO  Transaction -StartBot.java]- Details of Current Order:- 
+ EntryPrice->93014.0, 
+ Size->-2, 
+ CurrentTpPrice->0.0, 
+ CurrentAvgPrice->0.0:::::
+[19 Nov 2025 00:47:39,201 INFO  Transaction -StartBot.java]- ::::::::::::::::::::::::::::::::::New Order execution Ended:::::::::::::::::::::::::::::::::::
+[19 Nov 2025 00:47:39,471 INFO  Transaction -CheckAndOrderService.java]- Cancelled All Previous Orders for EntryPrice->93014.00000000, Size->-2:::::
+[19 Nov 2025 00:47:39,690 INFO  Transaction -CheckAndOrderService.java]- Leverage Set Successfully Orders for EntryPrice->93014.00000000, Size->-2, Leverage->10:::::
+[19 Nov 2025 00:50:25,086 INFO  Transaction -StartBot.java]- ::::::::::::::::::::::::::::::::::New Order execution Started:::::::::::::::::::::::::::::::::::
+[19 Nov 2025 00:50:25,108 INFO  Transaction -StartBot.java]- Details of Current Order:- 
+ EntryPrice->93014.0, 
+ Size->-2, 
+ CurrentTpPrice->0.0, 
+ CurrentAvgPrice->0.0:::::
+[19 Nov 2025 00:50:25,136 INFO  Transaction -StartBot.java]- ::::::::::::::::::::::::::::::::::New Order execution Ended:::::::::::::::::::::::::::::::::::
+[19 Nov 2025 00:50:25,363 INFO  Transaction -CheckAndOrderService.java]- Cancelled All Previous Orders for EntryPrice->93014.00000000, Size->-2:::::
+[19 Nov 2025 00:50:25,857 INFO  Transaction -CheckAndOrderService.java]- Leverage Set Successfully Orders for EntryPrice->93014.00000000, Size->-2, Leverage->10:::::
+[19 Nov 2025 00:50:26,991 INFO  Transaction -CheckAndOrderService.java]- Order Placed Successfully with Details:- 
+ Side->sell, 
+ LimitPrice->93764.0, 
+ Size->4:::::
+[19 Nov 2025 00:50:27,009 INFO  Transaction -CheckAndOrderService.java]- Order Placed Successfully with Details:- 
+ Side->buy, 
+ LimitPrice->92514.0, 
+ Size->4:::::
+[19 Nov 2025 00:54:30,952 INFO  Transaction -StartBot.java]- ::::::::::::::::::::::::::::::::::New Order execution Started:::::::::::::::::::::::::::::::::::
+[19 Nov 2025 00:54:30,953 INFO  Transaction -StartBot.java]- Details of Current Order:- 
+ EntryPrice->93014.0, 
+ Size->-2, 
+ CurrentTpPrice->0.0, 
+ CurrentAvgPrice->0.0:::::
+[19 Nov 2025 00:54:30,970 INFO  Transaction -StartBot.java]- ::::::::::::::::::::::::::::::::::New Order execution Ended:::::::::::::::::::::::::::::::::::
+[19 Nov 2025 00:54:31,180 INFO  Transaction -CheckAndOrderService.java]- Cancelled All Previous Orders for EntryPrice->93014.00000000, Size->-2:::::
+[19 Nov 2025 00:54:32,478 INFO  Transaction -CheckAndOrderService.java]- Leverage Set Successfully Orders for EntryPrice->93014.00000000, Size->-2, Leverage->10:::::
+[19 Nov 2025 00:54:33,889 INFO  Transaction -CheckAndOrderService.java]- Order Placed Successfully with Details:- 
+ Side->buy, 
+ LimitPrice->92514.0, 
+ Size->4:::::
+[19 Nov 2025 00:54:33,898 INFO  Transaction -CheckAndOrderService.java]- Order Placed Successfully with Details:- 
+ Side->sell, 
+ LimitPrice->93764.0, 
+ Size->4:::::
+[19 Nov 2025 01:00:19,138 ERROR Operators -Loggers.java]- Operator called default onErrorDropped
+reactor.core.Exceptions$ErrorCallbackNotImplemented: org.json.JSONException: JSONObject["entry_price"] is not a string (class org.json.JSONObject$Null : null).
+Caused by: org.json.JSONException: JSONObject["entry_price"] is not a string (class org.json.JSONObject$Null : null).
+	at org.json.JSONObject.wrongValueFormatException(JSONObject.java:2949) ~[json-20240303.jar:?]
+	at org.json.JSONObject.getString(JSONObject.java:887) ~[json-20240303.jar:?]
+	at com.deltaexchange.trade.service.StartBot.lambda$1(StartBot.java:64) ~[classes/:?]
+	at reactor.core.publisher.FluxPeekFuseable$PeekFuseableSubscriber.onNext(FluxPeekFuseable.java:196) [reactor-core-3.7.8.jar:3.7.8]
+	at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.onNext(FluxMapFuseable.java:129) [reactor-core-3.7.8.jar:3.7.8]
+	at reactor.core.publisher.MonoFlatMap$FlatMapMain.secondComplete(MonoFlatMap.java:245) [reactor-core-3.7.8.jar:3.7.8]
+	at reactor.core.publisher.MonoFlatMap$FlatMapInner.onNext(MonoFlatMap.java:305) [reactor-core-3.7.8.jar:3.7.8]
+	at reactor.core.publisher.FluxOnErrorResume$ResumeSubscriber.onNext(FluxOnErrorResume.java:79) [reactor-core-3.7.8.jar:3.7.8]
+	at reactor.core.publisher.FluxOnAssembly$OnAssemblySubscriber.onNext(FluxOnAssembly.java:539) [reactor-core-3.7.8.jar:3.7.8]
+	at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.onNext(FluxMapFuseable.java:129) [reactor-core-3.7.8.jar:3.7.8]
+	at reactor.core.publisher.FluxContextWrite$ContextWriteSubscriber.onNext(FluxContextWrite.java:107) [reactor-core-3.7.8.jar:3.7.8]
+	at reactor.core.publisher.FluxMapFuseable$MapFuseableConditionalSubscriber.onNext(FluxMapFuseable.java:299) [reactor-core-3.7.8.jar:3.7.8]
+	at reactor.core.publisher.FluxFilterFuseable$FilterFuseableConditionalSubscriber.onNext(FluxFilterFuseable.java:337) [reactor-core-3.7.8.jar:3.7.8]
+	at reactor.core.publisher.Operators$BaseFluxToMonoOperator.completePossiblyEmpty(Operators.java:2096) [reactor-core-3.7.8.jar:3.7.8]
+	at reactor.core.publisher.MonoCollect$CollectSubscriber.onComplete(MonoCollect.java:145) [reactor-core-3.7.8.jar:3.7.8]
+	at reactor.core.publisher.FluxMap$MapSubscriber.onComplete(FluxMap.java:144) [reactor-core-3.7.8.jar:3.7.8]
+	at reactor.core.publisher.FluxPeek$PeekSubscriber.onComplete(FluxPeek.java:260) [reactor-core-3.7.8.jar:3.7.8]
+	at reactor.core.publisher.FluxMap$MapSubscriber.onComplete(FluxMap.java:144) [reactor-core-3.7.8.jar:3.7.8]
+	at reactor.netty.channel.FluxReceive.onInboundComplete(FluxReceive.java:413) [reactor-netty-core-1.2.8.jar:1.2.8]
+	at reactor.netty.channel.ChannelOperations.onInboundComplete(ChannelOperations.java:455) [reactor-netty-core-1.2.8.jar:1.2.8]
+	at reactor.netty.channel.ChannelOperations.terminate(ChannelOperations.java:509) [reactor-netty-core-1.2.8.jar:1.2.8]
+	at reactor.netty.http.client.HttpClientOperations.onInboundNext(HttpClientOperations.java:821) [reactor-netty-http-1.2.8.jar:1.2.8]
+	at reactor.netty.channel.ChannelOperationsHandler.channelRead(ChannelOperationsHandler.java:115) [reactor-netty-core-1.2.8.jar:1.2.8]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+	at io.netty.channel.CombinedChannelDuplexHandler$DelegatingChannelHandlerContext.fireChannelRead(CombinedChannelDuplexHandler.java:436) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+	at io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:346) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+	at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:318) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+	at io.netty.channel.CombinedChannelDuplexHandler.channelRead(CombinedChannelDuplexHandler.java:251) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:442) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+	at io.netty.handler.ssl.SslHandler.unwrap(SslHandler.java:1519) [netty-handler-4.1.123.Final.jar:4.1.123.Final]
+	at io.netty.handler.ssl.SslHandler.decodeJdkCompatible(SslHandler.java:1377) [netty-handler-4.1.123.Final.jar:4.1.123.Final]
+	at io.netty.handler.ssl.SslHandler.decode(SslHandler.java:1428) [netty-handler-4.1.123.Final.jar:4.1.123.Final]
+	at io.netty.handler.codec.ByteToMessageDecoder.decodeRemovalReentryProtection(ByteToMessageDecoder.java:530) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+	at io.netty.handler.codec.ByteToMessageDecoder.callDecode(ByteToMessageDecoder.java:469) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+	at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:290) [netty-codec-4.1.123.Final.jar:4.1.123.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1357) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:440) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:868) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:166) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:796) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:732) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:658) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562) [netty-transport-4.1.123.Final.jar:4.1.123.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:998) [netty-common-4.1.123.Final.jar:4.1.123.Final]
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) [netty-common-4.1.123.Final.jar:4.1.123.Final]
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) [netty-common-4.1.123.Final.jar:4.1.123.Final]
+	at java.base/java.lang.Thread.run(Thread.java:842) [?:?]

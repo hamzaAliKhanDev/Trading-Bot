@@ -4,7 +4,6 @@ import java.time.Instant;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -15,6 +14,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import reactor.core.publisher.Mono;
+
 @Service
 public class PlaceOrderService {
 
@@ -27,51 +27,57 @@ public class PlaceOrderService {
     private DeltaConfig config;
     @Autowired
     private DeltaSignatureUtil signRequest;
+
     private final ObjectMapper mapper = new ObjectMapper();
 
     public Mono<JsonNode> placeOrder(String limitPrice, int size, String side) {
         try {
             String endpoint = "/v2/orders";
-            String query = "";
+
+            // EXACT deterministic JSON (required for signature)
+            String bodyJson =
+                    "{\"product_id\":" + config.getProductId() +
+                    ",\"product_symbol\":\"" + config.getSymbol() + "\"" +
+                    ",\"limit_price\":" + limitPrice +
+                    ",\"size\":" + size +
+                    ",\"side\":\"" + side + "\"" +
+                    ",\"order_type\":\"limit_order\"}";
 
             long timestamp = Instant.now().getEpochSecond();
-            
-            StringBuilder prehash = new StringBuilder();
-            prehash.append("POST").append(timestamp).append(endpoint).append("?").append(query);
-            String signature = signRequest.hmacSHA256(prehash.toString(), config.getApiSecret());
 
-            StringBuilder endpointWithParams = new StringBuilder();
-            endpointWithParams.append(endpoint).append("?").append(query);
+            consoleLogger.info("Order Body JSON::: {}", bodyJson);
+
+            // PREHASH: EXACT FORMAT REQUIRED BY DELTA INDIA
+            String prehash = "POST" + timestamp + endpoint + bodyJson;
+            consoleLogger.info("Order Prehash::: {}", prehash);
+
+            // SIGNATURE
+            String signature = signRequest.hmacSHA256(prehash, config.getApiSecret());
+            consoleLogger.info("Order Signature::: {}", signature);
+
             WebClient client = webClientService.buildClient(config.getBaseUrl());
 
-            JSONObject inputBody = new JSONObject();
-            inputBody.put("product_id", config.getProductId());
-            inputBody.put("product_symbol", config.getSymbol());
-            inputBody.put("limit_price", limitPrice);
-            inputBody.put("size", size);
-            inputBody.put("side", side);
-            inputBody.put("order_type", "limit_order");
-
             return client.post()
-                    .uri(endpointWithParams.toString())
+                    .uri(endpoint)
                     .header("api-key", config.getApiKey())
                     .header("signature", signature)
                     .header("timestamp", String.valueOf(timestamp))
+                    .header("Content-Type", "application/json")
                     .header("Accept", "application/json")
-                    .bodyValue(inputBody)
+                    .bodyValue(bodyJson)                         // RAW STRING BODY (important)
                     .retrieve()
                     .bodyToMono(String.class)
                     .map(response -> {
-                        consoleLogger.info("Response of Order Service:::::{}", response);
+                        consoleLogger.info("Response of Order Service:::: {}", response);
                         try {
-                            JsonNode json = mapper.readTree(response);
-                            return json;
+                            return mapper.readTree(response);
                         } catch (Exception e) {
                             throw new RuntimeException("Failed to parse Order Service response", e);
                         }
                     });
+
         } catch (Exception e) {
-            errorLogger.error("Error occured in Order Service:::", e);
+            errorLogger.error("Error occurred in Order Service:::", e);
         }
         return null;
     }

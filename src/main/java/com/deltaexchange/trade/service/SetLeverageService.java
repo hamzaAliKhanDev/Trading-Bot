@@ -4,7 +4,6 @@ import java.time.Instant;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -18,7 +17,7 @@ import reactor.core.publisher.Mono;
 
 @Service
 public class SetLeverageService {
-        private static final Logger consoleLogger = LogManager.getLogger("Console");
+    private static final Logger consoleLogger = LogManager.getLogger("Console");
     private static final Logger errorLogger = LogManager.getLogger("Error");
 
     @Autowired
@@ -27,47 +26,54 @@ public class SetLeverageService {
     private DeltaConfig config;
     @Autowired
     private DeltaSignatureUtil signRequest;
+
     private final ObjectMapper mapper = new ObjectMapper();
 
     public Mono<JsonNode> setOrderLeverage(int leverage) {
         try {
-            String endpoint = "/products/"+config.getProductId()+"/orders/leverage";
-            String query = "";
+
+            // EXACT SAME ENDPOINT AS WORKING CODE
+            String endpoint = "/v2/products/" + config.getProductId() + "/orders/leverage";
+
+            // BODY EXACT SAME AS WORKING CODE
+            String bodyJson = "{\"leverage\":" + leverage + "}";
 
             long timestamp = Instant.now().getEpochSecond();
-            
-            StringBuilder prehash = new StringBuilder();
-            prehash.append("POST").append(timestamp).append(endpoint).append("?").append(query);
-            String signature = signRequest.hmacSHA256(prehash.toString(), config.getApiSecret());
 
-            StringBuilder endpointWithParams = new StringBuilder();
-            endpointWithParams.append(endpoint).append("?").append(query);
+            consoleLogger.info("BodyJson String for Signature::: {}", bodyJson);
 
-            JSONObject inputJson = new JSONObject();
-            inputJson.put("leverage", leverage);
+            // EXACT SAME PREHASH FORMAT: POST + timestamp + endpoint + body
+            String prehash = "POST" + timestamp + endpoint + bodyJson;
+
+            consoleLogger.info("Prehash::: {}", prehash);
+
+            // SIGNATURE EXACTLY SAME
+            String signature = signRequest.hmacSHA256(prehash, config.getApiSecret());
 
             WebClient client = webClientService.buildClient(config.getBaseUrl());
 
+            consoleLogger.info("Final Endpoint:::: {}", endpoint);
+
             return client.post()
-                    .uri(endpointWithParams.toString())
+                    .uri(endpoint)
                     .header("api-key", config.getApiKey())
                     .header("signature", signature)
                     .header("timestamp", String.valueOf(timestamp))
-                    .header("Accept", "application/json")
-                    .bodyValue(inputJson)
+                    .header("Content-Type", "application/json")  // SAME AS WORKING CODE
+                    .bodyValue(bodyJson)                         // SEND RAW STRING BODY — REQUIRED
                     .retrieve()
                     .bodyToMono(String.class)
                     .map(response -> {
-                        consoleLogger.info("Response of setLeverage Service:::::{}", response);
+                        consoleLogger.info("Response of setOrderLeverage:::: {}", response);
                         try {
-                            JsonNode json = mapper.readTree(response);
-                            return json;
+                            return mapper.readTree(response);
                         } catch (Exception e) {
-                            throw new RuntimeException("Failed to setLeverage Service response", e);
+                            throw new RuntimeException("Failed to parse setOrderLeverage response", e);
                         }
                     });
+
         } catch (Exception e) {
-            errorLogger.error("Error occured in setLeverage Service:::", e);
+            errorLogger.error("Error occurred in setOrderLeverage:::", e);
         }
         return null;
     }

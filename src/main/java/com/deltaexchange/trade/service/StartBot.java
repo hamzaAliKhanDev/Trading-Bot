@@ -62,6 +62,10 @@ public class StartBot {
 
                                         if (result != null && !result.isEmpty()) {
                                             String entryPriceStr = result.getString("entry_price");
+                                            if(entryPriceStr==null || entryPriceStr.isEmpty()){
+                                                consoleLogger.info("[BOT] No EntryPrice found. Going for next tick::::::::");
+                                                entryPriceStr="";
+                                            }else{
                                             Double entryPrice = Double.valueOf(entryPriceStr);
 
                                             int size = result.getInt("size");
@@ -88,6 +92,9 @@ public class StartBot {
                                                         "::::::::::::::No TP/Avg price met. Going for another tick:::::::::::");
                                             }
 
+                                        }
+                                        }else{
+                                            consoleLogger.info("[BOT] Result JSON found empty or null in position service response. Going for another tick:::::::::::");
                                         }
 
                                     } else {
