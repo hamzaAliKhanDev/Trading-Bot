@@ -4,12 +4,12 @@ import java.time.Duration;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.deltaexchange.trade.config.DeltaConfig;
-import com.deltaexchange.trade.config.DeltaDto;
 
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Flux;
@@ -25,10 +25,10 @@ public class StartBot {
     private DeltaConfig config;
 
     @Autowired
-    private DeltaDto globalVar;
+    private CheckAndOrderService orderService;
 
     @Autowired
-    private CheckAndOrderService orderService;
+    private GetOpenOrdersService getOpenOrdersService;
 
     private static final Logger consoleLogger = LogManager.getLogger("Console");
     private static final Logger errorLogger = LogManager.getLogger("Error");
@@ -39,77 +39,294 @@ public class StartBot {
         consoleLogger.info("::::::::::::::::Bot Started:::::::::::::");
 
         Flux.interval(Duration.ofSeconds(config.getLoopInterval()))
-                .flatMap(tick -> {
+                .flatMap(tick -> positionService.getBTCPositionDetails()
+                        .doOnNext(position -> {
 
-                    // If needed later:
-                    // return priceService.getLatestPrice(config.getSymbol())
-                    // .flatMap(price -> {
+                            consoleLogger.info("[BOT] Position data received for tick {}: {}", tick, position);
 
-                    return positionService.getBTCPositionDetails()
-                            .doOnNext(position -> {
+                            if (position != null) {
 
-                                consoleLogger.info("[BOT] Position data received for tick {}: {}", tick, position);
+                                JSONObject positionServiceResponse = new JSONObject(position.toString());
 
-                                if (position != null) {
+                                boolean apiSuccess = positionServiceResponse.getBoolean("success");
 
-                                    JSONObject positionServiceResponse = new JSONObject(position.toString());
+                                if (apiSuccess) {
 
-                                    boolean apiSuccess = positionServiceResponse.getBoolean("success");
+                                    JSONObject result = positionServiceResponse.getJSONObject("result");
 
-                                    if (apiSuccess) {
+                                    if (result != null && !result.isEmpty()) {
 
-                                        JSONObject result = positionServiceResponse.getJSONObject("result");
+                                        // ENTRY PRICE — must be final or effectively final
+                                        final String[] entryPriceStr = { result.optString("entry_price", "") };
 
-                                        if (result != null && !result.isEmpty()) {
-                                            String entryPriceStr = result.getString("entry_price");
-                                            if(entryPriceStr==null || entryPriceStr.isEmpty()){
-                                                consoleLogger.info("[BOT] No EntryPrice found. Going for next tick::::::::");
-                                                entryPriceStr="";
-                                            }else{
-                                            Double entryPrice = Double.valueOf(entryPriceStr);
+                                        if (entryPriceStr[0] == null || entryPriceStr[0].isEmpty()) {
+                                            consoleLogger
+                                                    .info("[BOT] No EntryPrice found. Going for next tick::::::::");
+                                            entryPriceStr[0] = "";
+                                        } else {
 
-                                            int size = result.getInt("size");
-                                            consoleLogger.info("Current TP Price::::{}",globalVar.getTpPrice());
-                                            consoleLogger.info("Current Avg Price::::{}",globalVar.getAvgPrice());
-                                            if (globalVar.getTpPrice() == 0
-                                                    || globalVar.getAvgPrice() == 0
-                                                    || entryPrice.equals(globalVar.getTpPrice())
-                                                    || entryPrice.equals(globalVar.getAvgPrice())) {
+                                            final long[] entryPrice = { Long.valueOf(entryPriceStr[0]) };
 
-                                                /**
-                                                 * 1. Cancel All Orders
-                                                 * 2. Set leverage
-                                                 * 3. Place the TP and Avg Order
-                                                 */
-                                                transactionLogger.info("::::::::::::::::::::::::::::::::::New Order execution Started:::::::::::::::::::::::::::::::::::");
-                                                transactionLogger.info("Details of Current Order:- \n EntryPrice->{}, \n Size->{}, \n CurrentTpPrice->{}, \n CurrentAvgPrice->{}:::::",entryPrice,size,globalVar.getTpPrice(),globalVar.getAvgPrice());
+                                            // SIZE — also used inside nested lambda
+                                            final int[] size = { result.getInt("size") };
 
-                                                orderService.executionMain(entryPriceStr, size);
-                                                transactionLogger.info("::::::::::::::::::::::::::::::::::New Order execution Ended:::::::::::::::::::::::::::::::::::");
+                                            long tpPrice = 0;
+                                            long avgPrice = 0;
+                                            String tpOrderType = null;
+                                            String avgOrderType = null;
+                                            int tpOrderLimit = 0;
+                                            int avgOrderLimit = 0;
 
-                                            } else {
-                                                consoleLogger.info(
-                                                        "::::::::::::::No TP/Avg price met. Going for another tick:::::::::::");
+                                            if (size[0] == 2) {
+                                                tpPrice = entryPrice[0] + 500;
+                                                tpOrderType = "sell";
+                                                tpOrderLimit = 4;
+
+                                                avgPrice = entryPrice[0] - 750;
+                                                avgOrderType = "buy";
+                                                avgOrderLimit = 4;
+
+                                            } else if (size[0] == -2) {
+                                                tpPrice = entryPrice[0] - 500;
+                                                tpOrderType = "buy";
+                                                tpOrderLimit = 4;
+
+                                                avgPrice = entryPrice[0] + 750;
+                                                avgOrderType = "sell";
+                                                avgOrderLimit = 4;
+
+                                            } else if (size[0] == 6) {
+                                                tpPrice = entryPrice[0] + 500;
+                                                tpOrderType = "sell";
+                                                tpOrderLimit = 8;
+
+                                                avgPrice = entryPrice[0] - 750;
+                                                avgOrderType = "buy";
+                                                avgOrderLimit = 12;
+
+                                            } else if (size[0] == -6) {
+                                                tpPrice = entryPrice[0] - 500;
+                                                tpOrderType = "buy";
+                                                tpOrderLimit = 8;
+
+                                                avgPrice = entryPrice[0] + 750;
+                                                avgOrderType = "sell";
+                                                avgOrderLimit = 12;
+
+                                            } else if (size[0] == 18) {
+                                                tpPrice = entryPrice[0] + 200;
+                                                tpOrderType = "sell";
+                                                tpOrderLimit = 18;
+
+                                                avgPrice = entryPrice[0] - 750;
+                                                avgOrderType = "buy";
+                                                avgOrderLimit = 36;
+
+                                            } else if (size[0] == -18) {
+                                                tpPrice = entryPrice[0] - 200;
+                                                tpOrderType = "buy";
+                                                tpOrderLimit = 18;
+
+                                                avgPrice = entryPrice[0] + 750;
+                                                avgOrderType = "sell";
+                                                avgOrderLimit = 36;
+                                            }else if (size[0] == 54) {
+                                                tpPrice = entryPrice[0] + 200;
+                                                tpOrderType = "sell";
+                                                tpOrderLimit = 54;
+
+                                                avgPrice = entryPrice[0] - 750;
+                                                avgOrderType = "buy";
+                                                avgOrderLimit = 108;
+
+                                            } else if (size[0] == -54) {
+                                                tpPrice = entryPrice[0] - 200;
+                                                tpOrderType = "buy";
+                                                tpOrderLimit = 54;
+
+                                                avgPrice = entryPrice[0] + 750;
+                                                avgOrderType = "sell";
+                                                avgOrderLimit = 108;
+                                            }else if (size[0] == 162) {
+                                                tpPrice = entryPrice[0] + 125;
+                                                tpOrderType = "sell";
+                                                tpOrderLimit = 162;
+
+                                                avgPrice = entryPrice[0] - 750;
+                                                avgOrderType = "buy";
+                                                avgOrderLimit = 243;
+
+                                            } else if (size[0] == -162) {
+                                                tpPrice = entryPrice[0] - 125;
+                                                tpOrderType = "buy";
+                                                tpOrderLimit = 162;
+
+                                                avgPrice = entryPrice[0] + 750;
+                                                avgOrderType = "sell";
+                                                avgOrderLimit = 243;
+                                            }else if (size[0] == 405) {
+                                                tpPrice = entryPrice[0] + 125;
+                                                tpOrderType = "sell";
+                                                tpOrderLimit = 405;
+
+                                                avgPrice = entryPrice[0] - 750;
+                                                avgOrderType = "buy";
+                                                avgOrderLimit = 810;
+
+                                            } else if (size[0] == -405) {
+                                                tpPrice = entryPrice[0] - 125;
+                                                tpOrderType = "buy";
+                                                tpOrderLimit = 405;
+
+                                                avgPrice = entryPrice[0] + 750;
+                                                avgOrderType = "sell";
+                                                avgOrderLimit = 810;
+                                            }else if (size[0] == 1215) {
+                                                tpPrice = entryPrice[0] + 100;
+                                                tpOrderType = "sell";
+                                                tpOrderLimit = 1215;
+
+                                                avgPrice = entryPrice[0] - 750;
+                                                avgOrderType = "buy";
+                                                avgOrderLimit = 1822;
+
+                                            } else if (size[0] == -1215) {
+                                                tpPrice = entryPrice[0] - 100;
+                                                tpOrderType = "buy";
+                                                tpOrderLimit = 1215;
+
+                                                avgPrice = entryPrice[0] + 750;
+                                                avgOrderType = "sell";
+                                                avgOrderLimit = 1822;
+                                            }else if (size[0] == 3037) {
+                                                tpPrice = entryPrice[0] + 100;
+                                                tpOrderType = "sell";
+                                                tpOrderLimit = 3037;
+
+                                            } else if (size[0] == -3037) {
+                                                tpPrice = entryPrice[0] - 100;
+                                                tpOrderType = "buy";
+                                                tpOrderLimit = 3037;
                                             }
 
-                                        }
-                                        }else{
-                                            consoleLogger.info("[BOT] Result JSON found empty or null in position service response. Going for another tick:::::::::::");
+                                            // WRAP TP/AVG PRICE etc. in final arrays if used inside lambda
+                                            final long[] finalTpPrice = { tpPrice };
+                                            final long[] finalAvgPrice = { avgPrice };
+                                            final String[] finalTpOrderType = { tpOrderType };
+                                            final String[] finalAvgOrderType = { avgOrderType };
+                                            final int[] finalTpOrderLimit = { tpOrderLimit };
+                                            final int[] finalAvgOrderLimit = { avgOrderLimit };
+
+                                            if (finalTpPrice[0] != 0) {
+
+                                                getOpenOrdersService.getOpenOrdersForBTC()
+                                                        .subscribe(openOrderResult -> {
+
+                                                            if (openOrderResult != null) {
+
+                                                                JSONObject getOrdersServiceResponse = new JSONObject(
+                                                                        openOrderResult.toString());
+
+                                                                boolean apiSuccessOrder = getOrdersServiceResponse
+                                                                        .getBoolean("success");
+
+                                                                if (apiSuccessOrder) {
+
+                                                                    JSONArray resultArr = getOrdersServiceResponse
+                                                                            .getJSONArray("result");
+
+                                                                    boolean isTpPlaced = false;
+                                                                    boolean isAvgPlaced = false;
+
+                                                                    if (resultArr != null && !resultArr.isEmpty()) {
+
+                                                                        for (int i = 0; i < resultArr.length(); i++) {
+
+                                                                            JSONObject json = resultArr
+                                                                                    .getJSONObject(i);
+
+                                                                            int orderSize = json.getInt("size");
+                                                                            String side = json.getString("side");
+                                                                            long limitPrice = Long.valueOf(
+                                                                                    json.getString("limit_price"));
+                                                                            if (orderSize == finalTpOrderLimit[0]
+                                                                                    && side.equalsIgnoreCase(
+                                                                                            finalTpOrderType[0])
+                                                                                    && limitPrice == finalTpPrice[0]) {
+
+                                                                                isTpPlaced = true;
+
+                                                                            } else if (orderSize == finalAvgOrderLimit[0]
+                                                                                    && side.equalsIgnoreCase(
+                                                                                            finalAvgOrderType[0])
+                                                                                    && limitPrice == finalAvgPrice[0]) {
+
+                                                                                isAvgPlaced = true;
+                                                                            }
+                                                                        }
+                                                                        consoleLogger.info("Boolean Flags::::TP-->{}:::::Avg-->{}",isTpPlaced,isAvgPlaced);
+                                                                        if (isTpPlaced && isAvgPlaced) {
+                                                                            consoleLogger.info(
+                                                                                    "[BOT] TP and Avg Orders already placed. Going for next tick::::::::::::::::");
+                                                                        } else {
+
+                                                                            transactionLogger.info(
+                                                                                    "::::::::::::::::::::::::::::::::::New Order execution Started:::::::::::::::::::::::::::::::::::");
+                                                                            transactionLogger.info(
+                                                                                    "Details of Current Order:- \n EntryPrice->{}, \n Size->{}:::::",
+                                                                                    entryPrice[0], size[0]);
+
+                                                                            orderService.executionMain(entryPriceStr[0],
+                                                                                    size[0]);
+
+                                                                        }
+                                                                    }else{
+                                                                        consoleLogger.info("[BOT] No Open Order found. Placing new Orders::::::::::");
+                                                                        transactionLogger.info(
+                                                                                    "::::::::::::::::::::::::::::::::::New Order execution Started:::::::::::::::::::::::::::::::::::");
+                                                                            transactionLogger.info(
+                                                                                    "Details of Current Order:- \n EntryPrice->{}, \n Size->{}:::::",
+                                                                                    entryPrice[0], size[0]);
+
+                                                                            orderService.executionMain(entryPriceStr[0],
+                                                                                    size[0]);
+                                                                    }
+
+                                                                } else {
+                                                                    consoleLogger.info(
+                                                                            "[BOT] Get Active Orders API Failed. Going for next tick:::::::::::");
+                                                                }
+
+                                                            } else {
+                                                                consoleLogger.info(
+                                                                        "[BOT] Empty or null response found for Get Active Orders API. Going for next tick::::::::::");
+                                                            }
+
+                                                        });
+
+                                            } else {
+                                                consoleLogger
+                                                        .info("::::::::::::::Size of order is beyond 3037. Going for another tick:::::::::::");
+                                            }
+
                                         }
 
                                     } else {
                                         consoleLogger.info(
-                                                ":::::::::::Position Service API Failed with success flag as False::::::::::::");
+                                                "[BOT] Result JSON found empty or null in position service response. Going for another tick:::::::::::");
                                     }
 
                                 } else {
                                     consoleLogger.info(
-                                            ":::::::::::::No response returned from position service:::::::::");
+                                            ":::::::::::Position Service API Failed with success flag as False::::::::::::");
                                 }
-                            });
-                    // });
-                })
+
+                            } else {
+                                consoleLogger
+                                        .info(":::::::::::::No response returned from position service:::::::::");
+                            }
+                        }))
                 .doOnError(e -> errorLogger.error("[ERROR]:::::", e))
-                .subscribe(); // Start consuming the stream 
+                .subscribe();
     }
 }

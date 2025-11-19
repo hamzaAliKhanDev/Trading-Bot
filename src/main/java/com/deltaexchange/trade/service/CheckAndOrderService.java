@@ -6,8 +6,6 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.deltaexchange.trade.config.DeltaDto;
-
 @Service
 public class CheckAndOrderService {
 
@@ -17,8 +15,6 @@ public class CheckAndOrderService {
     private SetLeverageService setOrderLeverage;
     @Autowired
     private PlaceOrderService placeOrder;
-    @Autowired
-    private DeltaDto globalVars;
 
     private static final Logger consoleLogger = LogManager.getLogger("Console");
     private static final Logger errorLogger = LogManager.getLogger("Error");
@@ -70,32 +66,33 @@ public class CheckAndOrderService {
     }
 
     public int returnLeverage(int size) {
-        int leverage = 0;
-        switch (size) {
-            case 2:
-                leverage = 10;
-                break;
-            case -2:
-                leverage = 10;
-                break;
-            case 6:
-                leverage = 10;
-                break;
-            case -6:
-                leverage = 10;
-                break;
-            case 18:
-                leverage = 25;
-                break;
-            case -18:
-                leverage = 125;
-                break;
-            default:
-                leverage = 10;
-                break;
-        }
-        return leverage;
+
+    int abs = Math.abs(size);
+
+    switch (abs) {
+        case 2:
+        case 6:
+            return 10;
+
+        case 18:
+            return 25;
+
+        case 54:
+        case 162:
+            return 50; 
+            
+        case 405:
+            return 75;   
+           
+        case 1215:
+        case 3037:
+            return 100;     
+
+        default:
+            return 10;
     }
+}
+
 
     public void placeOrder(String entryPrice, int size) {
 
@@ -105,51 +102,81 @@ public class CheckAndOrderService {
 
             case 2:
                 executeOrder(String.valueOf(entryPriceDouble + 500), 4, "sell");
-                globalVars.setTpPrice(entryPriceDouble + 500);
-
                 executeOrder(String.valueOf(entryPriceDouble - 750), 4, "buy");
-                globalVars.setAvgPrice(entryPriceDouble - 750);
                 break;
 
             case -2:
                 executeOrder(String.valueOf(entryPriceDouble - 500), 4, "buy");
-                globalVars.setTpPrice(entryPriceDouble - 500);
-
                 executeOrder(String.valueOf(entryPriceDouble + 750), 4, "sell");
-                globalVars.setAvgPrice(entryPriceDouble + 750);
                 break;
 
             case 6:
                 executeOrder(String.valueOf(entryPriceDouble + 500), 8, "sell");
-                globalVars.setTpPrice(entryPriceDouble + 500);
-
                 executeOrder(String.valueOf(entryPriceDouble - 750), 12, "buy");
-                globalVars.setAvgPrice(entryPriceDouble - 750);
                 break;
 
             case -6:
                 executeOrder(String.valueOf(entryPriceDouble - 500), 8, "buy");
-                globalVars.setTpPrice(entryPriceDouble - 500);
-
                 executeOrder(String.valueOf(entryPriceDouble + 750), 12, "sell");
-                globalVars.setAvgPrice(entryPriceDouble + 750);
                 break;
 
             case 18:
                 executeOrder(String.valueOf(entryPriceDouble + 200), 18, "sell");
-                globalVars.setTpPrice(entryPriceDouble + 200);
-
                 executeOrder(String.valueOf(entryPriceDouble - 750), 36, "buy");
-                globalVars.setAvgPrice(entryPriceDouble - 750);
                 break;
 
             case -18:
                 executeOrder(String.valueOf(entryPriceDouble - 200), 18, "buy");
-                globalVars.setTpPrice(entryPriceDouble - 200);
-
                 executeOrder(String.valueOf(entryPriceDouble + 750), 36, "sell");
-                globalVars.setAvgPrice(entryPriceDouble + 750);
                 break;
+
+            case 54:
+                executeOrder(String.valueOf(entryPriceDouble + 200), 54, "sell");
+                executeOrder(String.valueOf(entryPriceDouble - 750), 108, "buy");
+                break;
+
+            case -54:
+                executeOrder(String.valueOf(entryPriceDouble - 200), 54, "buy");
+                executeOrder(String.valueOf(entryPriceDouble + 750), 108, "sell");
+                break;
+                
+            case 162:
+                executeOrder(String.valueOf(entryPriceDouble + 125), 162, "sell");
+                executeOrder(String.valueOf(entryPriceDouble - 750), 243, "buy");
+                break;
+
+            case -162:
+                executeOrder(String.valueOf(entryPriceDouble - 125), 162, "buy");
+                executeOrder(String.valueOf(entryPriceDouble + 750), 243, "sell");
+                break;
+              
+             case 405:
+                executeOrder(String.valueOf(entryPriceDouble + 125), 125, "sell");
+                executeOrder(String.valueOf(entryPriceDouble - 750), 405, "buy");
+                break;
+
+            case -405:
+                executeOrder(String.valueOf(entryPriceDouble - 125), 125, "buy");
+                executeOrder(String.valueOf(entryPriceDouble + 750), 810, "sell");
+                break;
+
+            case 1215:
+                executeOrder(String.valueOf(entryPriceDouble + 100), 1215, "sell");
+                executeOrder(String.valueOf(entryPriceDouble - 750), 1822, "buy");
+                break;
+
+            case -1215:
+                executeOrder(String.valueOf(entryPriceDouble - 100), 1215, "buy");
+                executeOrder(String.valueOf(entryPriceDouble + 750), 1822, "sell");
+                break;
+                
+            case 3037:
+                executeOrder(String.valueOf(entryPriceDouble + 100), 3037, "sell");
+                break;
+
+            case -3037:
+                executeOrder(String.valueOf(entryPriceDouble - 100), 3037, "buy");
+                break;    
         }
     }
 
@@ -168,6 +195,8 @@ public class CheckAndOrderService {
                 transactionLogger.info(
                         "Order Placed Successfully with Details:- \n Side->{}, \n LimitPrice->{}, \n Size->{}:::::",
                         side, limitPrice, size);
+                transactionLogger.info(
+                        "::::::::::::::::::::::::::::::::::New Order execution Ended:::::::::::::::::::::::::::::::::::");
             }
 
         }, error -> {
