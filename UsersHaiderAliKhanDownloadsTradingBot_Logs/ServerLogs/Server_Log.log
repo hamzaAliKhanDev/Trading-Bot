@@ -1324,3 +1324,15 @@ Consider defining a bean of type 'com.deltaexchange.trade.service.PlaceOrderServ
 [20 Nov 2025 01:01:29,475 INFO  [/] -DirectJDKLog.java]- Initializing Spring embedded WebApplicationContext
 [20 Nov 2025 01:01:29,475 INFO  ServletWebServerApplicationContext -ServletWebServerApplicationContext.java]- Root WebApplicationContext: initialization completed in 2432 ms
 [20 Nov 2025 01:01:30,925 INFO  TomcatWebServer -TomcatWebServer.java]- Tomcat started on port 8080 (http) with context path '/'
+[20 Nov 2025 01:24:28,116 INFO  TomcatWebServer -TomcatWebServer.java]- Tomcat initialized with port 8080 (http)
+[20 Nov 2025 01:24:28,147 INFO  StandardService -DirectJDKLog.java]- Starting service [Tomcat]
+[20 Nov 2025 01:24:28,147 INFO  StandardEngine -DirectJDKLog.java]- Starting Servlet engine: [Apache Tomcat/10.1.43]
+[20 Nov 2025 01:24:28,257 INFO  [/] -DirectJDKLog.java]- Initializing Spring embedded WebApplicationContext
+[20 Nov 2025 01:24:28,257 INFO  ServletWebServerApplicationContext -ServletWebServerApplicationContext.java]- Root WebApplicationContext: initialization completed in 2085 ms
+[20 Nov 2025 01:24:29,618 INFO  TomcatWebServer -TomcatWebServer.java]- Tomcat started on port 8080 (http) with context path '/'
+[20 Nov 2025 01:41:29,382 INFO  TomcatWebServer -TomcatWebServer.java]- Tomcat initialized with port 8080 (http)
+[20 Nov 2025 01:41:29,397 INFO  StandardService -DirectJDKLog.java]- Starting service [Tomcat]
+[20 Nov 2025 01:41:29,397 INFO  StandardEngine -DirectJDKLog.java]- Starting Servlet engine: [Apache Tomcat/10.1.43]
+[20 Nov 2025 01:41:29,488 INFO  [/] -DirectJDKLog.java]- Initializing Spring embedded WebApplicationContext
+[20 Nov 2025 01:41:29,491 INFO  ServletWebServerApplicationContext -ServletWebServerApplicationContext.java]- Root WebApplicationContext: initialization completed in 1965 ms
+[20 Nov 2025 01:41:30,713 INFO  TomcatWebServer -TomcatWebServer.java]- Tomcat started on port 8080 (http) with context path '/'

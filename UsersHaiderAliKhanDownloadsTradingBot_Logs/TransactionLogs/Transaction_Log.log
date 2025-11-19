@@ -1,0 +1,32 @@
+[20 Nov 2025 01:41:36,928 INFO  Transaction -StartBot.java]- ::::::::::::::::::::::::::::::::::New Order execution Started:::::::::::::::::::::::::::::::::::
+[20 Nov 2025 01:41:36,928 INFO  Transaction -StartBot.java]- Details of Current Order:- 
+ EntryPrice->88931, 
+ Size->-2:::::
+[20 Nov 2025 01:41:38,271 INFO  Transaction -CheckAndOrderService.java]- Cancelled All Previous Orders for EntryPrice->88931.50000000, Size->-2:::::
+[20 Nov 2025 01:41:38,750 INFO  Transaction -CheckAndOrderService.java]- Leverage Set Successfully Orders for EntryPrice->88931.50000000, Size->-2, Leverage->10:::::
+[20 Nov 2025 01:41:39,878 INFO  Transaction -CheckAndOrderService.java]- Order Placed Successfully with Details:- 
+ Side->buy, 
+ LimitPrice->88431, 
+ Size->4:::::
+[20 Nov 2025 01:41:39,878 INFO  Transaction -CheckAndOrderService.java]- ::::::::::::::::::::::::::::::::::New Order execution Ended:::::::::::::::::::::::::::::::::::
+[20 Nov 2025 01:41:39,878 INFO  Transaction -CheckAndOrderService.java]- Order Placed Successfully with Details:- 
+ Side->sell, 
+ LimitPrice->89681, 
+ Size->4:::::
+[20 Nov 2025 01:41:39,878 INFO  Transaction -CheckAndOrderService.java]- ::::::::::::::::::::::::::::::::::New Order execution Ended:::::::::::::::::::::::::::::::::::
+[20 Nov 2025 01:43:11,119 INFO  Transaction -StartBot.java]- ::::::::::::::::::::::::::::::::::New Order execution Started:::::::::::::::::::::::::::::::::::
+[20 Nov 2025 01:43:11,119 INFO  Transaction -StartBot.java]- Details of Current Order:- 
+ EntryPrice->88931, 
+ Size->-2:::::
+[20 Nov 2025 01:43:11,301 INFO  Transaction -CheckAndOrderService.java]- Cancelled All Previous Orders for EntryPrice->88931.50000000, Size->-2:::::
+[20 Nov 2025 01:43:11,763 INFO  Transaction -CheckAndOrderService.java]- Leverage Set Successfully Orders for EntryPrice->88931.50000000, Size->-2, Leverage->10:::::
+[20 Nov 2025 01:43:12,718 INFO  Transaction -CheckAndOrderService.java]- Order Placed Successfully with Details:- 
+ Side->buy, 
+ LimitPrice->88431, 
+ Size->4:::::
+[20 Nov 2025 01:43:12,719 INFO  Transaction -CheckAndOrderService.java]- ::::::::::::::::::::::::::::::::::New Order execution Ended:::::::::::::::::::::::::::::::::::
+[20 Nov 2025 01:43:12,959 INFO  Transaction -CheckAndOrderService.java]- Order Placed Successfully with Details:- 
+ Side->sell, 
+ LimitPrice->89681, 
+ Size->4:::::
+[20 Nov 2025 01:43:12,959 INFO  Transaction -CheckAndOrderService.java]- ::::::::::::::::::::::::::::::::::New Order execution Ended:::::::::::::::::::::::::::::::::::

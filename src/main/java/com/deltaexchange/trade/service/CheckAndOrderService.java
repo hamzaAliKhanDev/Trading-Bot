@@ -96,7 +96,9 @@ public class CheckAndOrderService {
 
     public void placeOrder(String entryPrice, int size) {
 
-        double entryPriceDouble = Double.parseDouble(entryPrice);
+        double entryPriceRaw = Double.parseDouble(entryPrice);
+        long entryPriceDouble = (long)entryPriceRaw;
+
 
         switch (size) {
 

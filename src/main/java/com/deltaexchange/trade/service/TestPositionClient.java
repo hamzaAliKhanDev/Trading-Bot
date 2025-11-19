@@ -8,7 +8,7 @@ import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 
-public class DeltaPositionClient {
+public class TestPositionClient {
 
     // TODO: PUT YOUR KEYS HERE
     private static final String API_KEY = "QkcozvN7XM6uzcRC5lREH6rdDXQI4i";
@@ -18,7 +18,7 @@ public class DeltaPositionClient {
 
     public static void main(String[] args) {
         try {
-            DeltaPositionClient client = new DeltaPositionClient();
+            TestPositionClient client = new TestPositionClient();
             client.getPosition(27);
         } catch (Exception e) {
             System.out.println("FATAL ERROR: " + e.getMessage());

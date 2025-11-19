@@ -65,7 +65,7 @@ public class StartBot {
                                             entryPriceStr[0] = "";
                                         } else {
 
-                                            final long[] entryPrice = { Long.valueOf(entryPriceStr[0]) };
+                                            final long[] entryPrice = { (long) Double.parseDouble(entryPriceStr[0]) };
 
                                             // SIZE — also used inside nested lambda
                                             final int[] size = { result.getInt("size") };
@@ -247,8 +247,8 @@ public class StartBot {
 
                                                                             int orderSize = json.getInt("size");
                                                                             String side = json.getString("side");
-                                                                            long limitPrice = Long.valueOf(
-                                                                                    json.getString("limit_price"));
+                                                                            long limitPrice = (long) Double.parseDouble(json.getString("limit_price"));
+
                                                                             if (orderSize == finalTpOrderLimit[0]
                                                                                     && side.equalsIgnoreCase(
                                                                                             finalTpOrderType[0])
