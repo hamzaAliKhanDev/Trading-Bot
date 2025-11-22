@@ -130,6 +130,7 @@ public class StartBot {
                                                 avgPrice = entryPrice[0] + 750;
                                                 avgOrderType = "sell";
                                                 avgOrderLimit = 36;
+
                                             }else if (size[0] == 54) {
                                                 tpPrice = entryPrice[0] + 200;
                                                 tpOrderType = "sell";
@@ -147,6 +148,7 @@ public class StartBot {
                                                 avgPrice = entryPrice[0] + 750;
                                                 avgOrderType = "sell";
                                                 avgOrderLimit = 108;
+
                                             }else if (size[0] == 162) {
                                                 tpPrice = entryPrice[0] + 125;
                                                 tpOrderType = "sell";
@@ -154,7 +156,7 @@ public class StartBot {
 
                                                 avgPrice = entryPrice[0] - 750;
                                                 avgOrderType = "buy";
-                                                avgOrderLimit = 243;
+                                                avgOrderLimit = 324;
 
                                             } else if (size[0] == -162) {
                                                 tpPrice = entryPrice[0] - 125;
@@ -163,50 +165,53 @@ public class StartBot {
 
                                                 avgPrice = entryPrice[0] + 750;
                                                 avgOrderType = "sell";
-                                                avgOrderLimit = 243;
-                                            }else if (size[0] == 405) {
+                                                avgOrderLimit = 324;
+
+                                            }else if (size[0] == 486) {
                                                 tpPrice = entryPrice[0] + 125;
                                                 tpOrderType = "sell";
-                                                tpOrderLimit = 405;
+                                                tpOrderLimit = 486;
 
                                                 avgPrice = entryPrice[0] - 750;
                                                 avgOrderType = "buy";
-                                                avgOrderLimit = 810;
+                                                avgOrderLimit = 972;
 
-                                            } else if (size[0] == -405) {
+                                            } else if (size[0] == -486) {
                                                 tpPrice = entryPrice[0] - 125;
                                                 tpOrderType = "buy";
-                                                tpOrderLimit = 405;
+                                                tpOrderLimit = 486;
 
                                                 avgPrice = entryPrice[0] + 750;
                                                 avgOrderType = "sell";
-                                                avgOrderLimit = 810;
-                                            }else if (size[0] == 1215) {
+                                                avgOrderLimit = 972;
+
+                                            }else if (size[0] == 1458) {
                                                 tpPrice = entryPrice[0] + 100;
                                                 tpOrderType = "sell";
-                                                tpOrderLimit = 1215;
+                                                tpOrderLimit = 1458;
 
                                                 avgPrice = entryPrice[0] - 750;
                                                 avgOrderType = "buy";
-                                                avgOrderLimit = 1822;
+                                                avgOrderLimit = 2916;
 
-                                            } else if (size[0] == -1215) {
+                                            } else if (size[0] == -1458) {
                                                 tpPrice = entryPrice[0] - 100;
                                                 tpOrderType = "buy";
-                                                tpOrderLimit = 1215;
+                                                tpOrderLimit = 1458;
 
                                                 avgPrice = entryPrice[0] + 750;
                                                 avgOrderType = "sell";
-                                                avgOrderLimit = 1822;
-                                            }else if (size[0] == 3037) {
+                                                avgOrderLimit = 2916;
+
+                                            }else if (size[0] == 4374) {
                                                 tpPrice = entryPrice[0] + 100;
                                                 tpOrderType = "sell";
-                                                tpOrderLimit = 3037;
+                                                tpOrderLimit = 4374;
 
-                                            } else if (size[0] == -3037) {
+                                            } else if (size[0] == -4374) {
                                                 tpPrice = entryPrice[0] - 100;
                                                 tpOrderType = "buy";
-                                                tpOrderLimit = 3037;
+                                                tpOrderLimit = 4374;
                                             }
 
                                             // WRAP TP/AVG PRICE etc. in final arrays if used inside lambda

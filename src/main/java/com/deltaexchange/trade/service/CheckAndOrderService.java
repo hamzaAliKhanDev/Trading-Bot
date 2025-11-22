@@ -78,15 +78,17 @@ public class CheckAndOrderService {
             return 25;
 
         case 54:
+            return 35;
+
         case 162:
-            return 50; 
+            return 45; 
             
-        case 405:
-            return 75;   
-           
-        case 1215:
-        case 3037:
-            return 100;     
+        case 486:
+            return 60;
+            
+        case 1458:
+        case 4374:
+            return 75;      
 
         default:
             return 10;
@@ -144,40 +146,40 @@ public class CheckAndOrderService {
                 
             case 162:
                 executeOrder(String.valueOf(entryPriceDouble + 125), 162, "sell");
-                executeOrder(String.valueOf(entryPriceDouble - 750), 243, "buy");
+                executeOrder(String.valueOf(entryPriceDouble - 750), 324, "buy");
                 break;
 
             case -162:
                 executeOrder(String.valueOf(entryPriceDouble - 125), 162, "buy");
-                executeOrder(String.valueOf(entryPriceDouble + 750), 243, "sell");
+                executeOrder(String.valueOf(entryPriceDouble + 750), 324, "sell");
                 break;
               
-             case 405:
-                executeOrder(String.valueOf(entryPriceDouble + 125), 125, "sell");
-                executeOrder(String.valueOf(entryPriceDouble - 750), 405, "buy");
+             case 486:
+                executeOrder(String.valueOf(entryPriceDouble + 125), 486, "sell");
+                executeOrder(String.valueOf(entryPriceDouble - 750), 972, "buy");
                 break;
 
-            case -405:
-                executeOrder(String.valueOf(entryPriceDouble - 125), 125, "buy");
-                executeOrder(String.valueOf(entryPriceDouble + 750), 810, "sell");
+            case -486:
+                executeOrder(String.valueOf(entryPriceDouble - 125), 486, "buy");
+                executeOrder(String.valueOf(entryPriceDouble + 750), 972, "sell");
                 break;
 
-            case 1215:
-                executeOrder(String.valueOf(entryPriceDouble + 100), 1215, "sell");
-                executeOrder(String.valueOf(entryPriceDouble - 750), 1822, "buy");
+            case 1458:
+                executeOrder(String.valueOf(entryPriceDouble + 100), 1458, "sell");
+                executeOrder(String.valueOf(entryPriceDouble - 750), 2916, "buy");
                 break;
 
-            case -1215:
-                executeOrder(String.valueOf(entryPriceDouble - 100), 1215, "buy");
-                executeOrder(String.valueOf(entryPriceDouble + 750), 1822, "sell");
-                break;
-                
-            case 3037:
-                executeOrder(String.valueOf(entryPriceDouble + 100), 3037, "sell");
+            case -1458:
+                executeOrder(String.valueOf(entryPriceDouble - 100), 1458, "buy");
+                executeOrder(String.valueOf(entryPriceDouble + 750), 2916, "sell");
                 break;
 
-            case -3037:
-                executeOrder(String.valueOf(entryPriceDouble - 100), 3037, "buy");
+            case 4374:
+                executeOrder(String.valueOf(entryPriceDouble + 100), 4374, "sell");
+                break;
+
+            case -4374:
+                executeOrder(String.valueOf(entryPriceDouble - 100), 4374, "buy");
                 break;    
         }
     }
