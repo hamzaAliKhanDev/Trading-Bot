@@ -85,10 +85,10 @@ public class CheckAndOrderService {
             
         case 486:
             return 60;
-            
-        case 1458:
+
+        case 1458:     
         case 4374:
-            return 75;      
+            return 75;
 
         default:
             return 10;
